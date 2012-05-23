@@ -28,7 +28,8 @@ Implementiert ein einfaches Schachspiel für die Kommandozeile. Das Programm sol
 eingegebenen Züge gültig sind und geschlagene Figuren automatisch vom Brett nehmen. Dabei genügt es, erst einmal die 
 grundlegenden Bewegungs- und Schlagregeln zu unterstützen. Komplexere Regeln wie zum Beispiel die Rochade müsst ihr 
 erstmal nicht einbauen. Ebenso ist es nicht unbedingt nötig, ein Schachmatt automatisch zu erkennen. Das Spiel endet, 
-wenn einer der Könige tatsächlich geschlagen wurde.
+wenn einer der Könige tatsächlich geschlagen wurde (das geht ohne Schachmatt-Erkennung natürlich nur, wenn ihr nicht
+erzwingt, dass der König aus dem Schach genommen wird.)
 
 #### Benutzereingaben
 
@@ -44,11 +45,14 @@ Weitere Notationsvarianten findet ihr in der [Wikipedia](http://de.wikipedia.org
 Regel aber dazu gedacht, den Spielverlauf wiederzugeben und daher wesentlich ausführlicher, als es für die Eingabe 
 nötig ist.
 
-Wenn ein Spieler einen ungültigen Zug eingibt, soll er eine entsprechende Meldung erhalten, woraufhin er es ein weiteres 
-Mal versuchen darf. Ungültig ist ein Zug zum Beispiel dann, wenn ein Spieler eine Figur des Gegners bewegen will, wenn 
-auf dem Zielfeld eine eigene Figur steht oder wenn er eine Figur auf ein Feld bewegen will, das außerhalb des erlaubten 
-Bewegungsrahmens für diese Figur liegt. Überlegt euch, welche dieser Einschränkungen für alle Figuren gleich sind und 
-welche ihr für bestimmte Figuren anpassen müsst.
+Wenn ein Spieler einen ungültigen Zug eingibt, soll er eine entsprechende Meldung erhalten, der Zug wird nicht durchgeführt
+und der Spieler darf es solange versuchen bis der Zug gültig ist.
+Ungültig ist ein Zug zum Beispiel:
+* wenn ein Spieler eine Figur des Gegners bewegen will
+* wenn auf dem Zielfeld eine eigene Figur steht
+* wenn er eine Figur auf ein Feld bewegen will, das außerhalb des erlaubten Bewegungsrahmens für diese Figur liegt
+Überlegt euch, welche dieser Einschränkungen für alle Figuren gleich sind und welche ihr für bestimmte Figuren anpassen
+müsst (welche davon sind Spiel-Regeln, welche davon Figuren-Regeln).
 
 #### Ausgabe
 
@@ -69,7 +73,7 @@ eingibt.
 
 An den Spielfeldrändern stehen die Namen der Zeilen (Zahlen von 1 bis 8) und Spalten (Buchstaben von a bis h). Beachtet, 
 dass bei der Darstellung von Schachbrettern üblicherweise a8 oben links und h1 unten rechts liegt. Das eigentliche Brett 
-ist von diesen namen durch eine leere Zeile beziehungsweise ein Leerzeichen getrennt.
+ist von diesen Namen durch eine leere Zeile beziehungsweise ein Leerzeichen getrennt.
 
 Jedes Zeichen entspricht einem Feld auf dem Spielbrett. Leere Felder werden durch ein Leerzeichen dargestellt, Felder 
 mit einer Figur darauf durch einen Buchstaben. Ihr könnt wahlweise die deutsche oder die englische Notation verwenden. 
@@ -81,8 +85,8 @@ dargestellt und Schwarz durch Kleinbuchstaben.
 
 Der Code soll so strukturiert sein, dass Spiellogik und Benutzerinteraktion komplett voneinander getrennt sind. Es soll 
 möglich sein, die Kommandozeilenoberfläche durch eine grafische Oberfläche zu ersetzen, ohne irgendwelchen vorhandenen 
-Code außer der `main` Funktion anpassen zu müssen. Legt am besten direkt entsprechende Ordner und Namespaces an, um für 
-euch selbst überprüfen zu können, ob diese Unterteilung eingehalten wird.
+Code außer der `main` Funktion ändern zu müssen (freilich muss noch code hinzugefügt werden). Legt am besten direkt
+entsprechende Ordner und Namespaces an, um für euch selbst überprüfen zu können, ob diese Unterteilung eingehalten wird.
 
 Arbeitet mit Vererbung und abstrakten Klassen, wo es sinnvoll ist. Im Folgenden zeigen wir euch ein (unvollständiges) 
 Beispiel, wie man Teile des Projekts strukturieren könnte.
@@ -95,13 +99,15 @@ Beispiel, wie man Teile des Projekts strukturieren könnte.
         }
         namespace Game
         {
-            class Piece;
+            class Piece; // Abstract
             namespace Pieces;
         }
     }
 
-Wenn ihr wollt, könnt ihr die Struktur noch flexibler gestalten, um später Features wie Netzwerkunterstützung, 
-speichern und laden oder KI-Spieler zu unterstützen.
+Wenn ihr wollt, könnt ihr die Struktur so flexibel gestalten, um später Features wie Netzwerkunterstützung, 
+speichern und laden oder KI-Spieler zu unterstützen. Achtung: Eine Faustregel besagt, dass mehr Struktur mehr Arbeit
+beim _ersten_ Implementieren bedeutet (kann ganz leicht ausarten!). Beim Warten, Anpassen und Erweitern reduziert eine
+gute, flexible Struktur den Aufwand.
 
 ### Aufgabe 2: Mehr Features
 
@@ -130,7 +136,3 @@ Erweitert euer Schachspiel um mindestens eines der folgenden Features (grob sort
   und Schachmatt führt zum sofortigen Spielende.
 * Lasst zwei Spieler per Netzwerk miteinander spielen
 * Schreibt eine Schach-KI, die in der Lage ist, einen der Betreuer zu schlagen.
-
-### Bonusaufgabe: Project Euler
-
-Falls du früher fertig bist oder einfach nur Lust auf mehr hast, schau dich mal bei [Project Euler](http://projecteuler.net/) um und such dir eine Aufgabe aus. Lade sie genau wie die beiden anderen Aufgaben hoch.
