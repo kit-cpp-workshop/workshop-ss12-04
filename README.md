@@ -51,6 +51,7 @@ Ungültig ist ein Zug zum Beispiel:
 * wenn ein Spieler eine Figur des Gegners bewegen will
 * wenn auf dem Zielfeld eine eigene Figur steht
 * wenn er eine Figur auf ein Feld bewegen will, das außerhalb des erlaubten Bewegungsrahmens für diese Figur liegt
+
 Überlegt euch, welche dieser Einschränkungen für alle Figuren gleich sind und welche ihr für bestimmte Figuren anpassen
 müsst (welche davon sind Spiel-Regeln, welche davon Figuren-Regeln).
 
