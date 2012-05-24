@@ -6,21 +6,22 @@
 \begin{frame}{Übersetzungs-Phasen (phases of translation)}
 	Es gibt 9 Phasen der Übersetzung von Quellcode zum Programm:
 	
+	\vspace{2em}
+	
 	\begin{block}{phases of translation (Standard, 2.1)}
-		\begin{itemize}
-			\item text processing (1-2)
-			\item tokenizing (3)
-			\item preprocessing (4)
-			\item string processing (5-6)
-			\item translation (7)
-			\item template instantiation (8)
-			\item linking (9)
-		\end{itemize}
+		\begin{enumerate}
+			\item[3.] tokenizing
+			\item<alert@2>[4.] preprocessing
+			\item[7.] translation
+			\item<alert@2>[9.] linking
+		\end{enumerate}
 	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]{Präprozessor}
 	Der Präprozessor arbeitet auf der Basis von Tokens, also auf Textausdrücken. Er führt auf dieser Basis folgende Operationen aus:
+	
+	\vspace{2em}
 	
 	\begin{itemize}
 		\item Einfügen von Dateiinhalten \verb|#include| (diese werden neu übersetzt!)
@@ -38,6 +39,7 @@
 	\end{itemize}
 	
 	\pause
+	\vspace{1em}
 	
 	Eine Datei ohne Präprozessor-Anweisungen oder auch nur ein Dateiabschnitt, der nicht von Anweisungen betroffen ist, geht unverändert von Eingabe zu Ausgabe.
 \end{frame}
@@ -45,6 +47,7 @@
 \begin{frame}[fragile]{Die include-Direktive}
 	\begin{block}{include-Direktive}
 		\verb|#include "|\emph{dateiname}\verb|"| \\
+		\vspace{0.5em}
 		ersetzt diese Zeile durch den Inhalt der Datei \emph{dateiname}. \\
 		Der Inhalt der Datei wandert durch die Phasen 1-4 bevor mit dem Preprocessing fortgefahren wird.
 	\end{block}
@@ -71,6 +74,7 @@
 \begin{frame}[fragile]{Die define-Direktive}
 	\begin{block}{define-Direktive}
 		\verb|#define NAME TOKEN0 TOKEN1.....| \\
+		\vspace{0.5em}
 		Definiert ein (object-like) Macro mit dem Namen \verb|NAME|, die darauf folgenden Token sind optional. Trifft der Präprozessor nach der Definition eines Macros auf das Token \verb|NAME|, so ersetzt er es durch die Token \verb|TOKEN0 TOKEN1....|.
 	\end{block}
 \end{frame}
