@@ -1,0 +1,84 @@
+\section{Modularisierung}
+
+\begin{frame}[fragile]{Aufteilung in Dateien}
+	Projekte werden schnell zu groß für einzelne Dateien.
+	
+	\begin{block}{Wie fein unterteilen?}
+		\begin{itemize}
+			\item Eine Datei pro Funktion/Methode?
+			\item Eine Datei pro Klasse?
+			\item Eine Datei pro Namespace?
+			\item Ganz anders?
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Aufteilung in Dateien}
+	\begin{block}{Faustregel}
+		\begin{itemize}
+			\item Namespaces entsprechen Ordnern
+			\item Klassen entsprechen Dateien
+			\item Gegebenenfalls zusätzliche Dateien für globale Makros
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Source und Header}
+	In C++ wird in der Regel zwischen Source-Dateien (.cpp) und Header-Dateien (.h oder .hpp) unterschieden.
+	
+	\begin{itemize}
+		\item Header-Dateien enthalten Klassen- und Funktionsprototypen
+		\item Source-Dateien enthalten die Implementierung dazu
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Beispiel: Source und Header}
+	\footnotesize
+	
+	
+	\begin{columns}
+		\column{0.4\textwidth}
+		\textbf{person.h}
+		\lstinputlisting[language=C++, linerange={4-12}]{cpp-code/person.h}
+		
+		\column{0.4\textwidth}
+		\textbf{person.cpp}
+		\lstinputlisting[language=C++]{cpp-code/person.cpp}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Include Guards}
+	Was passiert, wenn sich zwei Dateien gegenseitig per \verb|#include| einbinden?
+	
+	\vspace{2em}
+	
+	\begin{columns}
+		\column{0.4\textwidth}
+		\textbf{firstheader.h}
+		\lstinputlisting[language=C++, linerange={4-4}]{cpp-code/include-guard.h}
+		
+		\column{0.4\textwidth}
+		\textbf{secondheader}
+		\lstinputlisting[language=C++, linerange={12-12}]{cpp-code/include-guard.h}
+	\end{columns}
+	
+	\vspace{2em}
+	
+	Endlosschleife!
+\end{frame}
+
+\begin{frame}[fragile]{Include Guards}
+	Lösung: in jedem Header ein Makro definieren, das anzeigt, ob die Datei schon eingebunden wurde.
+	
+	\vspace{2em}
+	
+	\begin{columns}
+		\column{0.4\textwidth}
+		\textbf{firstheader.h}
+		\lstinputlisting[language=C++, linerange={1-6}]{cpp-code/include-guard.h}
+		
+		\column{0.4\textwidth}
+		\textbf{secondheader.h}
+		\lstinputlisting[language=C++, linerange={9-14}]{cpp-code/include-guard.h}
+	\end{columns}
+\end{frame}

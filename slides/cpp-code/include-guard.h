@@ -1,15 +1,14 @@
-#ifndef EINDEUTIGER_NAME
-#define EINDEUTIGER_NAME
+#ifndef FIRSTHEADER_H
+#define FIRSTHEADER_H
 
-// eigentlicher Header-Text
+#include "secondheader.h"
 
-#endif	// EINDEUTIGER_NAME
+#endif	// FIRSTHEADER_H
 
 
-#ifndef UNIQUE_NAME_FOR_HEADER
-// then (UNIQUE_NAME_FOR_HEADER ist NICHT definiert)
+#ifndef SECONDHEADER_H
+#define SECONDHEADER_H
 
-#else
-// else (UNIQUE_NAME_FOR_HEADER IST definiert)
+#include "firstheader.h"
 
-#endif
+#endif	// SECONDHEADER_H
