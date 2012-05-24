@@ -6,15 +6,17 @@
 \begin{frame}{Übersetzungs-Phasen (phases of translation)}
 	Es gibt 9 Phasen der Übersetzung von Quellcode zum Programm:
 	
-	\begin{itemize}
-		\item text processing (1-2)
-		\item tokenizing (3)
-		\item preprocessing (4)
-		\item string processing (5-6)
-		\item translation (7)
-		\item template instantiation (8)
-		\item linking (9)
-	\end{itemize}
+	\begin{block}{phases of translation (Standard, 2.1)}
+		\begin{itemize}
+			\item text processing (1-2)
+			\item tokenizing (3)
+			\item preprocessing (4)
+			\item string processing (5-6)
+			\item translation (7)
+			\item template instantiation (8)
+			\item linking (9)
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]{Präprozessor}
@@ -105,5 +107,100 @@
 \begin{frame}[fragile]{Die translation unit}
 	Beim Übersetzen werden bis auf den letzten Schritt die Eingabedateien (.cpp, .cc) unabhängig / getrennt voneinander behandelt.
 	
-	Hat der Präprozessor alle Einfüge- (\verb|#include|, \verb|#define|) und Auslass-Operationen (\verb|#if|, \verb|#else|) ausgeführt, 
+	Der Präprozessor arbeite nun auf einer .cpp-Datei. Er fügt dann Weiteres ein bzw. ersetzt (\verb|#include|, \verb|#define|) und lässt manches aus (\verb|#if|, \verb|#else|).
+	
+	\vspace{1em}
+	
+	\begin{block}{translation unit}
+		Die Ausgabe des Präprozessors ist dann also die source file (.cpp) plus alle eingebundenen Dateien abzüglich den Auslassungen und mit den Macro-Ersetzungen.\\
+		Das Entstandene nennt man \emph{translation unit}.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Linkage}
+	Eine translation unit wird dann in der 7. Phase der Übersetzung tatsächlich \emph{übersetzt}, also kompilliert.
+	
+	\vspace{1em}
+	
+	\begin{block}{linkage (Standard, 3.5:2)}
+		Hat in einer translation unit der Name eines »Dinges«, Referenz, Funktion, Typ, template oder namespace \emph{external linkage}, so darf auf das Etwas, das der Name benennt, auch in anderen translation units zugegriffen werden.
+	\end{block}
+	Im Normalfall hat ein Name in einem namespace (also nicht innerhalb einer Klassen oder Funktion) external linkage.
+	
+	\vspace{1em}
+	\pause
+	
+	Aber: Da zuvor in der 7. Phase schon kompilliert wird, muss dem Compiler gesagt werden, dass dieses Etwas überhaupt existiert.\\
+	\tiny
+	Siehe: \url{https://github.com/downloads/kit-cpp-workshop/workshop-ss12-03/addendum-header.pdf}
+\end{frame}
+
+\begin{frame}{Beispiel: external linkage}
+	\footnotesize
+	\begin{columns}[t]
+		\column{0.4\textwidth}
+		translation unit \emph{square.cpp}
+		\vspace{1em}
+		\lstinputlisting[language=C++, linerange={1-4}]{cpp-code/linkage.cpp}
+		
+		\pause
+		
+		\column{0.4\textwidth}
+		translation unit \emph{main.cpp}
+		\vspace{1em}
+		\lstinputlisting[language=C++, linerange={7-12}]{cpp-code/linkage.cpp}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Klassen und Linkage}
+	member functions von Klassen (Methoden) sind auch nur Funktionen, d.h. sie dürfen auch in anderen translation units verwendet werden.
+	
+	Dem Namen einer Klassen selbst schreibt man auch linkage zu. Hat der Name einer Klasse external linkage, so bedeutet dies nur, dass die Namen der member functions external linkage haben.
+	
+	\pause
+	\vspace{1em}
+	
+	\footnotesize
+	\begin{columns}[t]
+		\column{0.4\textwidth}
+		translation unit \emph{square.cpp}
+		\vspace{1em}
+		\lstinputlisting[language=C++, linerange={15-23}]{cpp-code/linkage.cpp}
+		
+		\pause
+		\column{0.4\textwidth}
+		translation unit \emph{main.cpp}
+		\vspace{1em}
+		\lstinputlisting[language=C++, linerange={15-18, 25-30}]{cpp-code/linkage.cpp}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Linkage-Modifier}
+	Im Normalfall hat ein Name in einem namespace (also nicht innerhalb einer Klassen oder Funktion) external linkage.
+	
+	\vspace{1em}
+	
+	Man kann die Linkage durch die Schlüsselwörter \verb|extern| und \verb|static| sowie durch unbenannte namespaces beeinflussen:
+	
+	\pause
+	
+	\begin{block}{static im Bezug auf Linkage}
+		Schreibt man vor die Definition eines »Dinges«, einer Referenz oder einer Funktion \verb|static|, so hat der Name \emph{internal linkage}.
+	\end{block}
+	
+	\pause
+	
+	\begin{block}{unnamed namespaces}
+		Alles innerhalb eines unbenannten namespaces \verb|namespace { /*...*/ }| hat erst einmal \emph{internal linkage}. Dies \enquote{vererbt} sich bspw. auf alle darinnen deklarierten Funktionen.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Beispiel: Linkage-Modifier}
+	\footnotesize
+	\alt<2>
+	{% on slide 1
+		\lstinputlisting[language=C++, tabsize=4]{cpp-code/linkage-modifiers.cpp}
+	}{% on slide 2
+		\lstinputlisting[language=C++, tabsize=4, commentstyle=\none]{cpp-code/linkage-modifiers.cpp}
+	}
 \end{frame}
