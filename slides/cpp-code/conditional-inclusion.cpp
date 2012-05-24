@@ -1,8 +1,18 @@
+#if defined(WIN32)
+#include <winsock2.h>
+#else
+#include <sys/net.h>
+// and more headers
+#endif
+
+
 #ifdef WIN32
 #include <winsock2.h>
 #else
-#include <sys/net.h> // and more headers
+#include <sys/net.h>
+// and more headers
 #endif
+
 
 #include <iostream>
 

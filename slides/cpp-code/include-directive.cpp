@@ -4,7 +4,18 @@ int square(int p)
 }
 
 
-#include "my-header.h"
+#include "myheader.h"
+
+int main()
+{
+	int i = square(42);
+}
+
+
+int square(int p)
+{
+	return p*p;
+}
 
 int main()
 {

@@ -1,34 +1,45 @@
 \section{Übersetzungs-Phasen}
 
 
-\subsection{Der Präprozessor}
-
 \begin{frame}{Übersetzungs-Phasen (phases of translation)}
-	Es gibt 9 Phasen der Übersetzung von Quellcode zum Programm:
+	Der Code durchläuft im Wesentlichen drei Arbeitsschritte:
 	
-	\vspace{2em}
-	
-	\begin{block}{phases of translation (Standard, 2.1)}
-		\begin{enumerate}
-			\item[3.] tokenizing
-			\item<alert@2>[4.] preprocessing
-			\item[7.] translation
-			\item<alert@2>[9.] linking
-		\end{enumerate}
-	\end{block}
+	\begin{enumerate}
+		\item Präprozessor
+		\item Compiler
+		\item Linker
+	\end{enumerate}
 \end{frame}
 
+\begin{frame}[fragile]{Übersetzungs-Phasen}
+	TODO: Grafik hier einfügen
+\end{frame}
+
+\subsection{Der Präprozessor}
+
 \begin{frame}[fragile]{Präprozessor}
-	Der Präprozessor arbeitet auf der Basis von Tokens, also auf Textausdrücken. Er führt auf dieser Basis folgende Operationen aus:
+	Der Präprozessor ersetzt Teile des Quelltexts nach bestimmten Regeln.
 	
 	\vspace{2em}
 	
 	\begin{itemize}
-		\item Einfügen von Dateiinhalten \verb|#include| (diese werden neu übersetzt!)
+		\item Einfügen von Dateiinhalten \verb|#include| \\
+		      (der Präprozessor wird auch für die eingefügte Datei ausgeführt!)
 		\item Suchen \& Ersetzen \verb|#define|
 		\item Bedingtes Einfügen \verb|#if|
 		\item Abbrechen der Übersetzung \verb|#error|
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Präprozessor}
+	\begin{block}{Warum?}
+		\begin{itemize}
+			\item Aufteilung des Projekts auf mehrere Dateien
+			\item Unterschiedlicher Code für unterschiedliche Plattformen
+			\item Automatische Codeerzeugung
+			\item ...
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]{Zusammenhang mit der Übersetzung}
@@ -36,20 +47,21 @@
 		\item Der Präprozessor wird durch Direktiven (Anweisungen) innerhalb des Quellcodes programmiert.
 		\item Präprozessor-Direktiven stehen in einer eigenen Zeile und beginnen mit einem \verb|#|
 		\item Die Quellcode-Dateien dienen zugleich als Eingabe für den Präprozessor. Die Ausgabe geht dann in die nächste Übersetzungsphase.
+		\item Nach Präprozessor-Direktiven muss KEIN Komma stehen
 	\end{itemize}
 	
 	\pause
 	\vspace{1em}
 	
-	Eine Datei ohne Präprozessor-Anweisungen oder auch nur ein Dateiabschnitt, der nicht von Anweisungen betroffen ist, geht unverändert von Eingabe zu Ausgabe.
+ 	Zeilen, die nicht von Anweisungen betroffen sind, werden vom Präprozessor unverändert ausgegeben.
 \end{frame}
 
 \begin{frame}[fragile]{Die include-Direktive}
 	\begin{block}{include-Direktive}
 		\verb|#include "|\emph{dateiname}\verb|"| \\
 		\vspace{0.5em}
-		ersetzt diese Zeile durch den Inhalt der Datei \emph{dateiname}. \\
-		Der Inhalt der Datei wandert durch die Phasen 1-4 bevor mit dem Preprocessing fortgefahren wird.
+		Ersetzt diese Zeile durch den Inhalt der Datei \emph{dateiname}. \\
+		Der Inhalt der Datei wird ebenfalls vom Präprozessor verarbeitet.
 	\end{block}
 	
 	\pause
@@ -57,24 +69,38 @@
 	
 	\small
 	Es gibt noch die Variante \verb|#include <|\emph{headername}\verb|>|.
-	
-	Gängige Compiler (Preprocessors) unterscheiden zwischen beiden Varianten folgendermaßen:
+\end{frame}
+
+\begin{frame}[fragile]{Die include-Direktive}
+	Gängige Compiler unterscheiden zwischen beiden Varianten folgendermaßen:
 	\begin{itemize}
-		\item Die \verb|"|-Variante ist für Header-Dateien des eigenen Projekts. Die Header-Datei wird zunächst im Ordner der Datei gesucht, in welcher die \verb|#include|-Direktive steht.
-		\item Die \verb|<>|-Variante ist für Header aus Bibliotheken, deren Pfade man dem Compiler bzw. der IDE zusätzlich mitteilt (z.B. für die Std-Lib, boost, qt usw.)
+		\item Die \verb|"|-Variante ist für Dateien des eigenen Projekts.
+		      Der angegebene Pfad wird relativ zum Pfad der aktuellen Datei interpretiert.
+		\item Die \verb|<>|-Variante ist für Dateien aus fremden Bibliotheken.
+		      Sie werden an vorher festgelegten Orten gesucht. (z.B. für die Std-Lib, boost, Qt usw.)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Beispiel: include}
 	\footnotesize
 	
+	
 	\begin{columns}
-		\column{0.4\textwidth}
-		\emph{my-header.h}
-		\lstinputlisting[language=C++, linerange={1-4}]{cpp-code/include-directive.cpp}
+		\only<1>{
+			\column{0.4\textwidth}
+			\textbf{myheader.h}
+			\lstinputlisting[language=C++, linerange={1-4}]{cpp-code/include-directive.cpp}
 		
-		\column{0.4\textwidth}
-		\lstinputlisting[language=C++, linerange={7-12}]{cpp-code/include-directive.cpp}
+			\column{0.4\textwidth}
+			\textbf{main.cpp}
+			\lstinputlisting[language=C++, linerange={7-12}]{cpp-code/include-directive.cpp}
+		}
+		
+		\only<2>{
+			\column{0.4\textwidth}
+			\textbf{Ergebnis}
+			\lstinputlisting[language=C++, linerange={15-23}]{cpp-code/include-directive.cpp}
+		}
 	\end{columns}
 \end{frame}
 
@@ -82,7 +108,7 @@
 	\begin{block}{define-Direktive}
 		\verb|#define NAME TOKEN0 TOKEN1.....| \\
 		\vspace{0.5em}
-		Definiert ein (object-like) Macro mit dem Namen \verb|NAME|, die darauf folgenden Token sind optional. Trifft der Präprozessor nach der Definition eines Macros auf das Token \verb|NAME|, so ersetzt er es durch die Token \verb|TOKEN0 TOKEN1....|.
+		Definiert ein Makro mit dem Namen \verb|NAME|, die darauf folgenden Token sind optional. Trifft der Präprozessor nach der Definition eines Macros auf das Token \verb|NAME|, so ersetzt er es durch die Token \verb|TOKEN0 TOKEN1....|.
 	\end{block}
 \end{frame}
 
@@ -91,38 +117,63 @@
 	\lstinputlisting[language=C++]{cpp-code/define-directive.cpp}
 \end{frame}
 
+\begin{frame}[fragile]{Die define-Direktive}
+	Makros können auch Parameter haben:
+	
+	\footnotesize
+	\lstinputlisting[language=C++]{cpp-code/define-parameters.cpp}
+	
+	\alert{ACHTUNG! Reine Textersetzung!}
+\end{frame}
+
+\begin{frame}[fragile]{Die define-Direktive}
+	Wann benutze ich \verb|#define|?
+	
+	\only<2>{
+		\alert{So selten wie möglich!}
+		
+		Stattdessen lieber \verb|typedef|, Konstanten, Funktionen, etc.
+	}
+\end{frame}
+
 \begin{frame}[fragile]{Bedingtes Einfügen}
 	\begin{block}{if-, else- und endif-Direktiven}
 		\begin{lstlisting}[language=C++]
 			#if constant_expression_0
-			// (0)
+			function_variation1();
 			#else
-			// (1)
+			function_variation2();
+			some_other_function();
 			#endif
 		\end{lstlisting}
-		Die Kommentare (0) usw. stehen für jeweils optional mehrere Zeilen Code.
-		Dann wird durch den Präprozessor entweder die Zeilen (0) oder (1) in seine Ausgabe (für die weitere Übersetzung) eingefügt. Was eingefügt wird, ist abhängig vom Wert von \verb|constant_expression_0|.
+		Abhängig vom Wert von \verb|constant_expression_0| wird entweder der Code zwischen \verb|#if| und \verb|#else| oder zwischen \verb|#else| und \verb|#endif| eingefügt.
 	\end{block}
 \end{frame}
 
 \begin{frame}[t]{Beispiel: Bedingtes Einfügen}
 	\footnotesize
-	\vspace{-0.5em}
-	\alt<2>
-	{% on slide 2
-		\lstinputlisting[language=C++]{cpp-code/conditional-inclusion.cpp}
-	}{% on slide 1
-		\lstinputlisting[language=C++, linerange={1-5}]{cpp-code/conditional-inclusion.cpp}
+	\only<1>{
+		\lstinputlisting[language=C++, linerange={1-6}]{cpp-code/conditional-inclusion.cpp}
+	}
+	\only<2>{
+		\lstinputlisting[language=C++, linerange={9-14}]{cpp-code/conditional-inclusion.cpp}
+	}
+	\only<3>{
+		\lstinputlisting[language=C++, linerange={17-28}]{cpp-code/conditional-inclusion.cpp}
 	}
 \end{frame}
 
 
+\subsection{Der Compiler}
+\begin{frame}[fragile]{Der Compiler...}
+	... ist intern furchtbar kompliziert, deshalb wird er hier nicht im Detail erklärt.
+\end{frame}
 
 
 \subsection{Der Linker}
 
 \begin{frame}[fragile]{Die translation unit}
-	Beim Übersetzen werden bis auf den letzten Schritt die Eingabedateien (.cpp, .cc) unabhängig / getrennt voneinander behandelt.
+	Bisher wurden sowohl vom Präprozessor als auch vom Compiler alle .cpp Dateien getrennt voneinander behandelt.
 	
 	Der Präprozessor arbeite nun auf einer .cpp-Datei. Er fügt dann Weiteres ein bzw. ersetzt (\verb|#include|, \verb|#define|) und lässt manches aus (\verb|#if|, \verb|#else|).
 	
@@ -135,7 +186,7 @@
 \end{frame}
 
 \begin{frame}{Linkage}
-	Eine translation unit wird dann in der 7. Phase der Übersetzung tatsächlich \emph{übersetzt}, also kompilliert.
+	Eine translation unit wird dann in der 7. Phase der Übersetzung tatsächlich \emph{übersetzt}, also kompiliert.
 	
 	\vspace{1em}
 	
@@ -147,7 +198,7 @@
 	\vspace{1em}
 	\pause
 	
-	Aber: Da zuvor in der 7. Phase schon kompilliert wird, muss dem Compiler gesagt werden, dass dieses Etwas überhaupt existiert.\\
+	Aber: Da zuvor in der 7. Phase schon kompiliert wird, muss dem Compiler gesagt werden, dass dieses Etwas überhaupt existiert.\\
 	\tiny
 	Siehe: \url{https://github.com/downloads/kit-cpp-workshop/workshop-ss12-03/addendum-header.pdf}
 \end{frame}
