@@ -1,0 +1,109 @@
+\section{Übersetzungs-Phasen}
+
+
+\subsection{Der Präprozessor}
+
+\begin{frame}{Übersetzungs-Phasen (phases of translation)}
+	Es gibt 9 Phasen der Übersetzung von Quellcode zum Programm:
+	
+	\begin{itemize}
+		\item text processing (1-2)
+		\item tokenizing (3)
+		\item preprocessing (4)
+		\item string processing (5-6)
+		\item translation (7)
+		\item template instantiation (8)
+		\item linking (9)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Präprozessor}
+	Der Präprozessor arbeitet auf der Basis von Tokens, also auf Textausdrücken. Er führt auf dieser Basis folgende Operationen aus:
+	
+	\begin{itemize}
+		\item Einfügen von Dateiinhalten \verb|#include| (diese werden neu übersetzt!)
+		\item Suchen \& Ersetzen \verb|#define|
+		\item Bedingtes Einfügen \verb|#if|
+		\item Abbrechen der Übersetzung \verb|#error|
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Zusammenhang mit der Übersetzung}
+	\begin{itemize}
+		\item Der Präprozessor wird durch Direktiven (Anweisungen) innerhalb des Quellcodes programmiert.
+		\item Präprozessor-Direktiven stehen in einer eigenen Zeile und beginnen mit einem \verb|#|
+		\item Die Quellcode-Dateien dienen zugleich als Eingabe für den Präprozessor. Die Ausgabe geht dann in die nächste Übersetzungsphase.
+	\end{itemize}
+	
+	\pause
+	
+	Eine Datei ohne Präprozessor-Anweisungen oder auch nur ein Dateiabschnitt, der nicht von Anweisungen betroffen ist, geht unverändert von Eingabe zu Ausgabe.
+\end{frame}
+
+\begin{frame}[fragile]{Die include-Direktive}
+	\begin{block}{include-Direktive}
+		\verb|#include "|\emph{dateiname}\verb|"| \\
+		ersetzt diese Zeile durch den Inhalt der Datei \emph{dateiname}. \\
+		Der Inhalt der Datei wandert durch die Phasen 1-4 bevor mit dem Preprocessing fortgefahren wird.
+	\end{block}
+	
+	\pause
+	\vspace{1em}
+	
+	Es gibt noch die Variante \verb|#include <|\emph{headername}\verb|>|, diese ist für Header-Dateien aus der Standard-Bibliothek gedacht. Gängige Compiler/Preprocessors behandeln beide Varianten ähnlich, es werden jedoch die Suchpfade für \emph{headername} gegenüber der ersten Variante verändert.
+\end{frame}
+
+\begin{frame}{Beispiel: include}
+	\footnotesize
+	
+	\begin{columns}
+		\column{0.4\textwidth}
+		\emph{my-header.h}
+		\lstinputlisting[language=C++, linerange={1-4}]{cpp-code/include-directive.cpp}
+		
+		\column{0.4\textwidth}
+		\lstinputlisting[language=C++, linerange={7-12}]{cpp-code/include-directive.cpp}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Die define-Direktive}
+	\begin{block}{define-Direktive}
+		\verb|#define NAME TOKEN0 TOKEN1.....| \\
+		Definiert ein (object-like) Macro mit dem Namen \verb|NAME|, die darauf folgenden Token sind optional. Trifft der Präprozessor nach der Definition eines Macros auf das Token \verb|NAME|, so ersetzt er es durch die Token \verb|TOKEN0 TOKEN1....|.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Beispiel: define-Direktive}
+	\footnotesize
+	\lstinputlisting[language=C++]{cpp-code/define-directive.cpp}
+\end{frame}
+
+\begin{frame}[fragile]{Bedingtes Einfügen}
+	\begin{block}{if-, else- und endif-Direktiven}
+		\begin{lstlisting}[language=C++]
+			#if constant_expression_0
+			// (0)
+			#else
+			// (1)
+			#endif
+		\end{lstlisting}
+		Die Kommentare (0) usw. stehen für jeweils optional mehrere Zeilen Code.
+		Dann wird durch den Präprozessor entweder die Zeilen (0) oder (1) in seine Ausgabe (für die weitere Übersetzung) eingefügt. Was eingefügt wird, ist abhängig vom Wert von \verb|constant_expression_0|.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Beispiel: Bedingtes Einfügen}
+	\footnotesize
+	\lstinputlisting[language=C++]{cpp-code/conditional-inclusion.cpp}
+\end{frame}
+
+
+
+
+\subsection{Der Linker}
+
+\begin{frame}[fragile]{Die translation unit}
+	Beim Übersetzen werden bis auf den letzten Schritt die Eingabedateien (.cpp, .cc) unabhängig / getrennt voneinander behandelt.
+	
+	Hat der Präprozessor alle Einfüge- (\verb|#include|, \verb|#define|) und Auslass-Operationen (\verb|#if|, \verb|#else|) ausgeführt, 
+\end{frame}
