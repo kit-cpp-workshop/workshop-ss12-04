@@ -55,7 +55,14 @@
 	\pause
 	\vspace{1em}
 	
-	Es gibt noch die Variante \verb|#include <|\emph{headername}\verb|>|, diese ist für Header-Dateien aus der Standard-Bibliothek gedacht. Gängige Compiler/Preprocessors behandeln beide Varianten ähnlich, es werden jedoch die Suchpfade für \emph{headername} gegenüber der ersten Variante verändert.
+	\small
+	Es gibt noch die Variante \verb|#include <|\emph{headername}\verb|>|.
+	
+	Gängige Compiler (Preprocessors) unterscheiden zwischen beiden Varianten folgendermaßen:
+	\begin{itemize}
+		\item Die \verb|"|-Variante ist für Header-Dateien des eigenen Projekts. Die Header-Datei wird zunächst im Ordner der Datei gesucht, in welcher die \verb|#include|-Direktive steht.
+		\item Die \verb|<>|-Variante ist für Header aus Bibliotheken, deren Pfade man dem Compiler bzw. der IDE zusätzlich mitteilt (z.B. für die Std-Lib, boost, qt usw.)
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Beispiel: include}
@@ -98,9 +105,15 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{Beispiel: Bedingtes Einfügen}
+\begin{frame}[t]{Beispiel: Bedingtes Einfügen}
 	\footnotesize
-	\lstinputlisting[language=C++]{cpp-code/conditional-inclusion.cpp}
+	\vspace{-0.5em}
+	\alt<2>
+	{% on slide 2
+		\lstinputlisting[language=C++]{cpp-code/conditional-inclusion.cpp}
+	}{% on slide 1
+		\lstinputlisting[language=C++, linerange={1-5}]{cpp-code/conditional-inclusion.cpp}
+	}
 \end{frame}
 
 
