@@ -38,47 +38,73 @@
 	
 	\begin{columns}
 		\column{0.4\textwidth}
-		\textbf{person.h}
-		\lstinputlisting[language=C++, linerange={4-12}]{cpp-code/person.h}
+		\emph{person.h}
+		\vspace{0.5em}
+		\lstinputlisting[language=C++, linerange={3-12}]{cpp-code/person.h}
 		
 		\column{0.4\textwidth}
-		\textbf{person.cpp}
+		\emph{person.cpp}
+		\vspace{0.5em}
 		\lstinputlisting[language=C++]{cpp-code/person.cpp}
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Include Guards}
-	Was passiert, wenn sich zwei Dateien gegenseitig per \verb|#include| einbinden?
+\begin{frame}[fragile]{Inkludieren von Headern in Header}
+	Freilich darf man auch in Header-Dateien \verb|#include|-Direktiven stehen haben. Man verwendet dies bspw., wenn man einen Typen in einem Header benötigt:
 	
 	\vspace{2em}
 	
-	\begin{columns}
-		\column{0.4\textwidth}
-		\textbf{firstheader.h}
-		\lstinputlisting[language=C++, linerange={4-4}]{cpp-code/include-guard.h}
+	\footnotesize
+	\begin{columns}[t]
+		\column{0.2\textwidth}
+		\emph{pair.h}
+		\vspace{0.5em}
+		\lstinputlisting[language=C++, linerange={1-5}, tabsize=4]{cpp-code/header-inclusion.cpp}
 		
-		\column{0.4\textwidth}
-		\textbf{secondheader}
-		\lstinputlisting[language=C++, linerange={12-12}]{cpp-code/include-guard.h}
+		\uncover<2->
+		{
+			\column{0.3\textwidth}
+			\emph{MyClass.h}
+			\vspace{0.5em}
+			\lstinputlisting[language=C++, linerange={8-15}, tabsize=4]{cpp-code/header-inclusion.cpp}
+		}
+		
+		\uncover<3->
+		{
+			\column{0.3\textwidth}
+			\emph{program.cpp}
+			\vspace{0.5em}
+			\lstinputlisting[language=C++, linerange=18, tabsize=4]{cpp-code/header-inclusion.cpp}
+		}
 	\end{columns}
-	
-	\vspace{2em}
-	
-	Endlosschleife!
 \end{frame}
 
-\begin{frame}[fragile]{Include Guards}
+\begin{frame}{Include Guards}
 	Lösung: in jedem Header ein Makro definieren, das anzeigt, ob die Datei schon eingebunden wurde.
 	
-	\vspace{2em}
+	\vspace{1em}
 	
-	\begin{columns}
-		\column{0.4\textwidth}
-		\textbf{firstheader.h}
-		\lstinputlisting[language=C++, linerange={1-6}]{cpp-code/include-guard.h}
+	\footnotesize
+	\begin{columns}[t]
+		\column{0.2\textwidth}
+		\emph{pair.h}
+		\vspace{0.5em}
+		\lstinputlisting[language=C++, linerange={1-10}, tabsize=4]{cpp-code/header-guards.cpp}
 		
-		\column{0.4\textwidth}
-		\textbf{secondheader.h}
-		\lstinputlisting[language=C++, linerange={9-14}]{cpp-code/include-guard.h}
+		\uncover<2->
+		{
+			\column{0.3\textwidth}
+			\emph{MyClass.h}
+			\vspace{0.5em}
+			\lstinputlisting[language=C++, linerange={13-25}, tabsize=4]{cpp-code/header-guards.cpp}
+		}
+		
+		\uncover<3->
+		{
+			\column{0.3\textwidth}
+			\emph{program.cpp}
+			\vspace{0.5em}
+			\lstinputlisting[language=C++, linerange=28, tabsize=4]{cpp-code/header-guards.cpp}
+		}
 	\end{columns}
 \end{frame}
