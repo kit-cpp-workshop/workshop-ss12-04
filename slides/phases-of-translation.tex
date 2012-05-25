@@ -35,6 +35,7 @@
 	\begin{block}{Warum?}
 		\begin{itemize}
 			\item Aufteilung des Projekts auf mehrere Dateien
+			\item Verschiedene Build-Konfigurationen (z.B. Debug/Release)
 			\item Unterschiedlicher Code für unterschiedliche Plattformen
 			\item Automatische Codeerzeugung
 			\item ...
@@ -125,7 +126,12 @@
 	\vspace{1em}
 	
 	\footnotesize
-	\lstinputlisting[language=C++]{cpp-code/define-parameters.cpp}
+	\alt<2->
+	{% on slide 2
+		\lstinputlisting[language=C++, linerange=13]{cpp-code/define-parameters.cpp}
+	}{% on slide 1
+		\lstinputlisting[language=C++, linerange={1-12}]{cpp-code/define-parameters.cpp}
+	}
 	
 	\alert{ACHTUNG! Reine Textersetzung!}
 \end{frame}
@@ -134,7 +140,7 @@
 	Wann benutze ich Makros bzw. \verb|#define|?
 	
 	\vspace{2em}
-	\uncover<+->
+	\uncover<2->
 	{
 		\alert{So selten wie möglich!}
 		
@@ -171,8 +177,16 @@
 
 
 \subsection{Der Compiler}
-\begin{frame}[fragile]{Der Compiler...}
-	... ist intern furchtbar kompliziert, deshalb wird er hier nicht im Detail erklärt.
+\begin{frame}[fragile]{Der Compiler}
+	Übersetzt von Quellcode in Maschinensprache.
+	
+	\vspace{1em}
+	
+	Alles was wir in vorigen Workshops behandelt haben, beschreibt gültige Eingaben für den Compiler (Quellcode).
+	
+	\vspace{2em}
+	
+	{\footnotesize (Da C++ kompliziert ist, ist es weder einfach noch hilfreich, eine Übersicht über das zu geben, wie seine Eingabe und Ausgabe zusammenhängt.) }
 \end{frame}
 
 
@@ -196,7 +210,7 @@
 \end{frame}
 
 \begin{frame}{Linkage}
-	Eine translation unit wird dann in der 7. Phase der Übersetzung tatsächlich \emph{übersetzt}, also kompiliert.
+	Eine translation unit wird dann vom Compiler tatsächlich \emph{übersetzt}, also kompiliert. Es werden alle translation units des Projektes übersetzt und anschließend verknüpft (gelinkt).
 	
 	\vspace{1em}
 	
