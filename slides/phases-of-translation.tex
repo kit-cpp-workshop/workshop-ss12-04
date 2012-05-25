@@ -12,7 +12,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Übersetzungs-Phasen}
-	TODO: Grafik hier einfügen
+	\includegraphics[width=\textwidth]{images/translation-simple}
 \end{frame}
 
 \subsection{Der Präprozessor}
@@ -47,13 +47,13 @@
 		\item Der Präprozessor wird durch Direktiven (Anweisungen) innerhalb des Quellcodes programmiert.
 		\item Präprozessor-Direktiven stehen in einer eigenen Zeile und beginnen mit einem \verb|#|
 		\item Die Quellcode-Dateien dienen zugleich als Eingabe für den Präprozessor. Die Ausgabe geht dann in die nächste Übersetzungsphase.
-		\item Nach Präprozessor-Direktiven muss KEIN Komma stehen
+		\item Nach Präprozessor-Direktiven steht \emph{kein} Semikolon \verb|;|
 	\end{itemize}
 	
 	\pause
 	\vspace{1em}
 	
- 	Zeilen, die nicht von Anweisungen betroffen sind, werden vom Präprozessor unverändert ausgegeben.
+ 	Zeilen, die nicht von Präprozessor-Direktiven betroffen sind, werden vom Präprozessor unverändert ausgegeben.
 \end{frame}
 
 \begin{frame}[fragile]{Die include-Direktive}
@@ -85,20 +85,23 @@
 	\footnotesize
 	
 	
-	\begin{columns}
+	\begin{columns}[t]
 		\only<1>{
 			\column{0.4\textwidth}
-			\textbf{myheader.h}
+			{\normalsize \emph{myheader.h} }
+			\vspace{0.5em}
 			\lstinputlisting[language=C++, linerange={1-4}]{cpp-code/include-directive.cpp}
 		
 			\column{0.4\textwidth}
-			\textbf{main.cpp}
+			{\normalsize \emph{main.cpp} }
+			\vspace{0.5em}
 			\lstinputlisting[language=C++, linerange={7-12}]{cpp-code/include-directive.cpp}
 		}
 		
 		\only<2>{
 			\column{0.4\textwidth}
-			\textbf{Ergebnis}
+			{\normalsize \emph{Ergebnis} }
+			\vspace{0.5em}
 			\lstinputlisting[language=C++, linerange={15-23}]{cpp-code/include-directive.cpp}
 		}
 	\end{columns}
@@ -118,7 +121,8 @@
 \end{frame}
 
 \begin{frame}[fragile]{Die define-Direktive}
-	Makros können auch Parameter haben:
+	Makros können auch Parameter haben (function-like macro):
+	\vspace{1em}
 	
 	\footnotesize
 	\lstinputlisting[language=C++]{cpp-code/define-parameters.cpp}
@@ -127,10 +131,11 @@
 \end{frame}
 
 \begin{frame}[fragile]{Die define-Direktive}
-	Wann benutze ich \verb|#define|?
+	Wann benutze ich Makros bzw. \verb|#define|?
 	
-	\only<2>{
-		\vspace{2em}
+	\vspace{2em}
+	\uncover<+->
+	{
 		\alert{So selten wie möglich!}
 		
 		Stattdessen lieber typedef, Konstanten, Funktionen, etc.
@@ -184,6 +189,10 @@
 		Die Ausgabe des Präprozessors ist dann also die source file (.cpp) plus alle eingebundenen Dateien abzüglich den Auslassungen und mit den Macro-Ersetzungen.\\
 		Das Entstandene nennt man \emph{translation unit}.
 	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Übersetzungs-Phasen}
+	\includegraphics[width=\textwidth]{images/translation}
 \end{frame}
 
 \begin{frame}{Linkage}
