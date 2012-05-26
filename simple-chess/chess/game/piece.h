@@ -15,7 +15,7 @@ class piece
         virtual int GetID();
         bool getcolour();
 
-    private:
+    protected:
         bool colour;
 
         // Unterschiedlich für verschiedene Figuren:
