@@ -6,11 +6,19 @@ Kurze Einführung in die Thematik
 
 ### Folien zum Vortrag
 
-Die Vortragsfolien stehen als [PDF](URL) zum Download bereit. Außerdem liegt der LaTeX-Quellcode zu den Folien im Ordner `slides`.
+Die Vortragsfolien stehen als [PDF](https://github.com/downloads/kit-cpp-workshop/workshop-ss12-04/slides.pdf) zum Download bereit. Außerdem liegt der LaTeX-Quellcode zu den Folien im Ordner `slides`.
 
-###Screencast
+### Screencast
 
-Ein Screencast des Vortrags wird nach dem Workshop an dieser Stelle verlinkt.
+Eine Aufzeichnung des Vortrags steht zum [Download](http://ubuntuone.com/7aINm5vTShhKjOTjbrRkUo) bereit. Von Audioqualität kann man leider dieses Mal nicht sprechen, das Hintergrundrauschen/-pfeifen hat außerdem alle Fragen und Diskussionsbeiträge überdeckt.
+
+ - ab 00:00 Intro
+ - ab 00:37 Übersicht Übersetzungs-Phasen
+ - ab 01:49 Präprozessor
+ - ab 17:48 Linker
+ - ab 25:16 Modularisierung
+ - ab 36:32 Vorstellung der Aufgaben
+ 
 
 ## Aufgaben
 
