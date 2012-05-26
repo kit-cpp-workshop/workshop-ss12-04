@@ -11,6 +11,7 @@ class piece
 {
     public:
         piece(bool piece_colour); // Figur mit Farbe erzeugen
+        piece(); // Default-Konstruktor, für initialisierung des Spielfelds benötigt.
         virtual ~piece();
 
         /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to" auf Brett "board" möglich ist.
