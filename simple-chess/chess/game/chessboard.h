@@ -6,7 +6,7 @@
 
 namespace game {
 
-const int chessboard_size = 8;
+const unsigned int chessboard_size = 8;
 
 class chessboard
 {
