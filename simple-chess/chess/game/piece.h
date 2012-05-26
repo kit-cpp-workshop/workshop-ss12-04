@@ -17,10 +17,10 @@ class piece
         /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to" auf Brett "board" möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell check_diagonal oder check_linear auf, um zu testen, ob was im Weg steht */
-        virtual bool possible_move(coor from, coor to, chessboard &board);
+        virtual bool possible_move(coor from, coor to, chessboard &board) = 0;
 
         // Ausgabe zur Darstellung:
-        virtual int GetID();
+        virtual int GetID() = 0;
         bool getcolour();
 
     protected:
