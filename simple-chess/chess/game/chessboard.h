@@ -30,7 +30,7 @@ class chessboard
         bool occupied(coor field); // Zum testen, ob da eine Figur steht.
     protected:
     private:
-        piece[chessboard_size][chessboard_size];
+        piece spielfeld[chessboard_size][chessboard_size];
 };
 
 
