@@ -13,9 +13,14 @@ Da dies die einzige erlaubte Manipulation ist, sind nicht mehr Befehle dafür vo
 class chessboard
 {
     public:
-        chessboard();
+        chessboard(); /* Füllt das Schachbrett mit der Startaufstellung */
         ~chessboard();
-        // int wegen "Alles OK", "Ungültiger Zug" und "Gewonnen"
+
+        /* Methode, um eine Figur des Spielers "player_color" zu bewegen.
+        Prüft, ob "from" eine eigene figur und "to" nicht mit einer eigenen Figur belegt ist.
+        Anschließend wird die "move"-Methode der Figur auf dem Feld aufgerufen, um die geometrische Richtigkeit des Zuges zu überprüfen.
+        Wenn der zug möglich ist, so wird dieser durchgeführt.
+        int-Return-Wert wegen "Alles OK", "Ungültiger Zug" und "Gewonnen". */
         int move(bool player_color, coord from, coord to);
 
         // zur Darstellung:

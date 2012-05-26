@@ -6,10 +6,12 @@
 
 namespace chess{
 
+/* Die Klasse für das gesamte Schachspiel. */
+
 class chessgame
 {
     public:
-        chessgame();
+        chessgame(); /* Konstruktor erzeugt ein chessboard */
         ~chessgame();
         void run(); // hier drin steckt der Spielablauf: Abwechselnd weiß und schwarz ziehen, bis König geschlagen.
     protected:
