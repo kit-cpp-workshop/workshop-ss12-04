@@ -16,13 +16,11 @@ class piece
     protected:
     private:
         bool colour;
-        bool check_source_field(coord from);
-        bool check_target_field(coord to);
 
         // Unterschiedlich für verschiedene Figuren:
         virtual bool check_geometrical_possible(coord from, coord to);
 
-        //Werden von Dame, Läufer und Turm gebraucht:
+        //Werden von obriger Funktion von Dame, Läufer und Turm gebraucht:
         bool check_linear(coord from, coord to);
         bool ckeck_diagonal(coord from, coord to);
 

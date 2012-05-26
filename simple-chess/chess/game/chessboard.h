@@ -14,7 +14,6 @@ class chessboard
     public:
         chessboard();
         ~chessboard();
-        // eigentlich könnte man auch Code von der piece-Klasse hierher übernehmen ...
         // int wegen "Alles OK", "Ungültiger Zug" und "Gewonnen"
         int move(bool player_color, coord from, coord to);
 
