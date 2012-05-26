@@ -9,9 +9,10 @@ class chessgame
     public:
         chessgame();
         ~chessgame();
-        void run(); // hier drin steckt der Spielablauf
+        void run(); // hier drin steckt der Spielablauf: Abwechselnd weiß und schwarz ziehen, bis König geschlagen.
     protected:
     private:
+        bool current_player_color;
 };
 
 
