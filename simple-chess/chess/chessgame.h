@@ -1,6 +1,8 @@
 #ifndef CHESSGAME_H
 #define CHESSGAME_H
 
+#include "general.h"
+#include "game/chessboard.h"
 
 namespace chess{
 
