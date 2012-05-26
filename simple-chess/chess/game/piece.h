@@ -30,11 +30,15 @@ class piece
 
 };
 
-class piece_bauer : public piece {
+namespace pieces {
+
+class bauer : public piece {
     int GetID();
     bool possible_move(coord from, coord to, chessboard &board);
 
 };
+
+}
 
 }
 }
