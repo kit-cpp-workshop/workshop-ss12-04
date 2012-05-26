@@ -21,7 +21,7 @@ class chessboard
         Anschließend wird die "move"-Methode der Figur auf dem Feld aufgerufen, um die geometrische Richtigkeit des Zuges zu überprüfen.
         Wenn der zug möglich ist, so wird dieser durchgeführt.
         int-Return-Wert wegen "Alles OK", "Ungültiger Zug" und "Gewonnen". */
-        int move(bool player_color, coord from, coord to);
+        int move(bool player_color, coor from, coor to);
 
         // zur Darstellung:
         int getID(coor field); //gibt ID zurück

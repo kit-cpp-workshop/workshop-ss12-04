@@ -2,6 +2,7 @@
 #define PIECE_H
 
 #include "../general.h"
+#include "chessboard.h"
 
 namespace chess{
 namespace game {
@@ -15,7 +16,7 @@ class piece
         /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to" möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell check_diagonal oder check_linear auf, um zu testen, ob was im Weg steht */
-        virtual bool possible_move(coord from, coord to, chessboard &board);
+        virtual bool possible_move(coor from, coor to, chessboard &board);
 
         // Ausgabe zur Darstellung:
         virtual int GetID();
@@ -25,8 +26,8 @@ class piece
         bool colour;
 
         //Werden von "possible_move" von Dame, Läufer und Turm gebraucht:
-        bool check_linear(coord from, coord to, chessboard &board);
-        bool ckeck_diagonal(coord from, coord to, chessboard &board);
+        bool check_linear(coor from, coor to, chessboard &board);
+        bool ckeck_diagonal(coor from, coor to, chessboard &board);
 
 };
 
@@ -34,7 +35,7 @@ namespace pieces {
 
 class bauer : public piece {
     int GetID();
-    bool possible_move(coord from, coord to, chessboard &board);
+    bool possible_move(coor from, coor to, chessboard &board);
 
 };
 
