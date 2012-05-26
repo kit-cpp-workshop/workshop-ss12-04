@@ -13,9 +13,9 @@ class piece
         virtual ~piece();
 
         /* Überprüfung, ob ein Bewegen von "from" nach "to" möglich ist.
-        ruft die virtuelle Funktion "check_geometrical_possible" auf, die für jede Figur verschieden ist.
-        Diese Funktion hier ist nicht virtuell zwecks einheitlicher Rückgabewerte. */
-        int possible_move(coord from, coord to, chessboard &board);
+        Für jede Figur verschieden.
+        Ruft eventuell check_diagonal oder check_linear auf */
+        virtual bool possible_move(coord from, coord to, chessboard &board);
 
         // Ausgabe zur Darstellung:
         virtual int GetID();
@@ -24,10 +24,7 @@ class piece
     protected:
         bool colour;
 
-        // Unterschiedlich für verschiedene Figuren:
-        virtual bool check_geometrical_possible(coord from, coord to);
-
-        //Werden von obriger Funktion von Dame, Läufer und Turm gebraucht:
+        //Werden von "possible_move" von Dame, Läufer und Turm gebraucht:
         bool check_linear(coord from, coord to, chessboard &board);
         bool ckeck_diagonal(coord from, coord to, chessboard &board);
 
@@ -35,7 +32,7 @@ class piece
 
 class piece_bauer : public piece {
     int GetID();
-    bool check_geometrical_possible(coord from, coord to);
+    bool possible_move(coord from, coord to, chessboard &board);
 
 };
 
