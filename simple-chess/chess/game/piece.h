@@ -11,9 +11,10 @@ class piece
         piece(bool piece_colour); // Figur mit Farbe
         virtual ~piece();
         int move(coord from, coord to, chessboard &board);
+
         virtual int GetID();
-        //virtual void remove(); // Aktionen auslösen beim besiegen von Figuren, wie z.B. dem König
-    protected:
+        bool getcolour();
+
     private:
         bool colour;
 
@@ -26,7 +27,11 @@ class piece
 
 };
 
+class piece_bauer : public piece {
+    int GetID();
+    bool check_geometrical_possible(coord from, coord to);
 
+};
 
 }
 #endif // PIECE_H
