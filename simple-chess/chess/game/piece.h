@@ -12,9 +12,9 @@ class piece
         piece(bool piece_colour); // Figur mit Farbe erzeugen
         virtual ~piece();
 
-        /* Überprüfung, ob ein Bewegen von "from" nach "to" möglich ist.
+        /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to" möglich ist.
         Für jede Figur verschieden.
-        Ruft eventuell check_diagonal oder check_linear auf */
+        Ruft eventuell check_diagonal oder check_linear auf, um zu testen, ob was im Weg steht */
         virtual bool possible_move(coord from, coord to, chessboard &board);
 
         // Ausgabe zur Darstellung:
