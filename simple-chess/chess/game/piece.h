@@ -8,11 +8,11 @@ namespace game {
 class piece
 {
     public:
-        piece();
+        piece(bool piece_colour); // Figur mit Farbe
         virtual ~piece();
-        bool move(coord from, coord to, chessboard &board);
+        int move(coord from, coord to, chessboard &board);
         virtual int GetID();
-        virtual void remove(); // Aktionen auslösen beim besiegen von Figuren, wie z.B. dem König
+        //virtual void remove(); // Aktionen auslösen beim besiegen von Figuren, wie z.B. dem König
     protected:
     private:
         bool colour;
