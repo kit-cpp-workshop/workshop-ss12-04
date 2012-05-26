@@ -26,6 +26,8 @@ class chessboard
         // zur Darstellung:
         int getID(coor field); //gibt ID zurück
         bool getcolor(coor field);
+
+        bool occupied(coor field); // Zum testen, ob da eine Figur steht.
     protected:
     private:
         piece[chessboard_size][chessboard_size];
