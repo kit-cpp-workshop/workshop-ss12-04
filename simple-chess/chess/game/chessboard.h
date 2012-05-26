@@ -6,15 +6,13 @@
 
 namespace game {
 
-const unsigned int chessboard_size = 8;
-
 class chessboard
 {
     public:
         chessboard();
         ~chessboard();
         // eigentlich könnte man auch Code von der piece-Klasse hierher übernehmen ...
-        bool move(coord from, coord to);
+        bool move(bool player_color, coord from, coord to);
     protected:
     private:
         piece[chessboard_size][chessboard_size];
