@@ -3,6 +3,7 @@
 
 #include "../general.h"
 
+namespace chess{
 namespace game {
 
 class piece
@@ -33,5 +34,6 @@ class piece_bauer : public piece {
 
 };
 
+}
 }
 #endif // PIECE_H

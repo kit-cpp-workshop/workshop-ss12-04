@@ -2,6 +2,8 @@
 #define GENERAL_H_INCLUDED
 
 // General needed things
+namespace chess {
+
 
 struct coor {
     int x;
@@ -22,4 +24,5 @@ const unsigned int id_turm = 4;
 const unsigned int id_dame = 5;
 const unsigned int id_koenig = 6;
 
+}
 #endif // GENERAL_H_INCLUDED

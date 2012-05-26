@@ -2,6 +2,8 @@
 #define CHESSGAME_H
 
 
+namespace chess{
+
 class chessgame
 {
     public:
@@ -12,4 +14,6 @@ class chessgame
     private:
 };
 
+
+}
 #endif // CHESSGAME_H

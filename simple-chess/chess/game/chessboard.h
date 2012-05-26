@@ -4,6 +4,7 @@
 #include "piece.h"
 #include "../general.h"
 
+namespace chess{
 namespace game {
 
 /* Diese Klasse enthält das Spielbrett als Figuren-Array und dient zum durchführen der Züge.
@@ -26,5 +27,6 @@ class chessboard
 };
 
 
+}
 }
 #endif // CHESSBOARD_H
