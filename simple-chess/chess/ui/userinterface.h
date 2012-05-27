@@ -2,6 +2,7 @@
 #define USERINTERFACE_H
 
 #include "../general.h"
+#include "../game/chessboard.h"
 
 namespace chess {
 namespace ui {
@@ -11,15 +12,15 @@ class UserInterface
     public:
         UserInterface();
         virtual ~UserInterface();
-        virtual void draw_board(chessboard board); /* Stellt das Schachbrett dar */
+        virtual void draw_board(game::chessboard board) = 0; /* Stellt das Schachbrett dar */
 
         /* Holt sich die Koordinaten für den nächsten Zug des entsprechenden Spielers
          in "from" und "to" */
-        virtual void read_move(bool player_color, coor &from, coor &to);
+        virtual void read_move(bool player_color, coor &from, coor &to) = 0;
 
         /* Ausgabe von Informationen */
-        virtual void print_error_message(int error_id);
-        virtual void print_info_message(int info_id);
+        virtual void print_error_message(int error_id) = 0;
+        virtual void print_info_message(int info_id) = 0;
 };
 
 }
