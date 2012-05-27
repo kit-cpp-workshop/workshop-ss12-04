@@ -70,6 +70,12 @@ class none : public piece {
 
 };
 
+class turm : public piece {
+    int GetID();
+    bool possible_move(coor from, coor to, chessboard &board);
+
+};
+
 
 }
 
