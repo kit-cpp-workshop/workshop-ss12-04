@@ -9,11 +9,16 @@ namespace game {
 class piece
 {
     public:
-        piece(); // Default-Konstruktor, für initialisierung des Spielfelds benötigt.
-        piece(bool piece_colour); // Figur mit Farbe erzeugen
-        ~piece();
+        /* Default-Konstruktor, für initialisierung des Spielfelds benötigt.
+        Daher ist diese Klasse auch nicht rein virtuell. */
+        piece();
 
-        /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to" auf dem Spielfeld "board" möglich ist.
+        piece(bool piece_colour); // Figur mit Farbe erzeugen
+
+        virtual ~piece();
+
+        /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to"
+        auf dem übergebenem Array möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell check_diagonal oder check_linear auf, um zu testen, ob was im Weg steht */
         virtual bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
@@ -23,7 +28,7 @@ class piece
         bool getcolour();
 
     protected:
-        bool colour;
+        bool colour; //Die Farbe der Figur
 
         //Werden von "possible_move" von Dame, Läufer und Turm gebraucht, benutzt chessboard.occupied:
         bool check_linear(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
