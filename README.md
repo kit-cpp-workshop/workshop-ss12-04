@@ -2,7 +2,7 @@
 
 ## Inhalt
 
-Kurze Einführung in die Thematik
+Thema heute: Modularisierung, sowie als Grundlage dafür, die Phasen der Programm-Übersetzung.
 
 ### Folien zum Vortrag
 
