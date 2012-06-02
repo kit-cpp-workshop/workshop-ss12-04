@@ -9,14 +9,16 @@
 #define INTERFACE_H_
 
 #include <string>
+#include "../game/brett.h"
 
 class Interface
 {
 public:
-	void ausgabe(char (*f)[8]);
+	void ausgabe(brett* b);
 	void einlesen(int p);
 
-	char e[6];
+	char p1a,p2a;
+	int p1b,p2b;
 };
 
 
