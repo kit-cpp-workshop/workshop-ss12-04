@@ -14,11 +14,11 @@ void Interface::einlesen(int p)
 {
 	std::cout << "Spieler " << p << ": Bitte Zug eingeben: ";
 
-	//std::cin >> p1a >> p1b >> p2a >> p2b;
-	p1a='e';
+	std::cin >> p1a >> p1b >> p2a >> p2b;
+	/*p1a='e';
 	p2a='e';
 	p1b=2;
-	p2b=4;
+	p2b=4;*/
 }
 
 void Interface::ausgabe(brett* b)

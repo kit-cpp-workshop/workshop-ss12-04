@@ -37,7 +37,7 @@ char brett::lese(int x,int y)
 
 bool brett::schreibe(int x,int y,char value)
 {
-	if ((x>=0) && (x<8) && (y>0) && (y<8))
+	if ((x>=0) && (x<8) && (y>=0) && (y<8))
 	{
 		f[x+8*y]=value;
 		return true;

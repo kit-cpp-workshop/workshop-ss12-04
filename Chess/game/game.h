@@ -26,7 +26,7 @@ public:
 	Game();
 	void zug();
 	int aendern(char a,int b,char c,int d);
-
+	~Game();
 };
 
 #endif /* GAME_H_ */

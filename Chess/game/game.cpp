@@ -21,7 +21,7 @@
 
 Game::Game()
 {
-	brett* b=new brett();
+	b=new brett();
 	for (int i=0;i<8;i++)
 	{
 		b->schreibe(i,1,'b');
@@ -53,6 +53,11 @@ Game::Game()
 	return;
 }
 
+Game::~Game()
+{
+	delete b;
+}
+
 void Game::zug()
 {
 	do
@@ -71,7 +76,7 @@ void Game::zug()
 
 		for (int i=0;i<8;i++)
 		{
-			for (int j=1;j<8;j++)
+			for (int j=0;j<8;j++)
 			{
 				if (b->lese(i,j)=='K') { k1=true; }
 				if (b->lese(i,j)=='k') { k2=true; }
@@ -134,6 +139,7 @@ int Game::aendern(char a,int be,char c,int d)
 	figur[nummer]->move(x2,y2,b);
 	return true;
 }
+
 
 
 
