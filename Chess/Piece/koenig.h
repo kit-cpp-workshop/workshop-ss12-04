@@ -14,7 +14,7 @@ class Koenig : public Piece
 {
 public:
 	Koenig(int a,int b,int c);
-	virtual bool bewegungmoeglich(int a,int b);
+	virtual bool bewegungmoeglich(int a,int b,brett* brett);
 	virtual ~Koenig();
 };
 

@@ -124,7 +124,7 @@ int Game::aendern(char a,int be,char c,int d)
 	if ((y1<0) || (y1>7)) { return false; }
 	if ((y2<0) || (y2>7)) { return false; }
 
-	if (figur[nummer]->bewegungmoeglich(x2,y2)==false)
+	if (figur[nummer]->bewegungmoeglich(x2,y2,b)==false)
 	{
 		return false;
 	}

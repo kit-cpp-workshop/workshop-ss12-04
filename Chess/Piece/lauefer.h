@@ -14,7 +14,7 @@ class Laeufer : public Piece
 {
 public:
 	Laeufer(int a,int b,int c);
-	virtual bool bewegungmoeglich(int a,int b);
+	virtual bool bewegungmoeglich(int a,int b,brett* brett);
 	virtual ~Laeufer();
 };
 

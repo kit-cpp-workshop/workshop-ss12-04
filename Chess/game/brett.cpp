@@ -29,7 +29,7 @@ char brett::lese(int x,int y)
 	if ((x>=0) && (x<8) && (y>=0) && (y<8))
 	{
 		int val=x+8*y;
-		char z=f[val]; // --> geht nicht, warum????
+		char z=f[val];
 		return z;
 	}
 	return '-';

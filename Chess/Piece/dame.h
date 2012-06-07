@@ -14,7 +14,7 @@ class Dame : public Piece
 {
 public:
 	Dame(int a,int b,int c);
-	virtual bool bewegungmoeglich(int a,int b);
+	virtual bool bewegungmoeglich(int a,int b,brett* brett);
 	virtual ~Dame();
 };
 

@@ -14,7 +14,7 @@ class Bauer : public Piece
 {
 public:
 	Bauer(int a,int b,int c);
-	virtual bool bewegungmoeglich(int a,int b);
+	virtual bool bewegungmoeglich(int a,int b,brett* brett);
 	virtual ~Bauer();
 };
 

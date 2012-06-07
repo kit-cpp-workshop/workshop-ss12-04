@@ -17,7 +17,7 @@ public:
 	bool IsPosition(int a, int b, int c);
 	void move(int xn, int yn,brett* b);
 	void geschlagen();
-	virtual bool bewegungmoeglich(int a,int b)=0;
+	virtual bool bewegungmoeglich(int a,int b,brett* brett)=0;
 	virtual ~Piece();
 protected:
 	int x;

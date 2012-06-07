@@ -14,7 +14,7 @@ class Turm : public Piece
 {
 public:
 	Turm(int a,int b,int c);
-	virtual bool bewegungmoeglich(int a,int b);
+	virtual bool bewegungmoeglich(int a,int b,brett* brett);
 	virtual ~Turm();
 };
 
