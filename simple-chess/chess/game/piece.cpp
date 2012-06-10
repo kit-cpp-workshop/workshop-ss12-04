@@ -3,66 +3,25 @@
 namespace chess {
 namespace game {
 
-piece::piece(bool piece_colour) {
-    colour = piece_colour;
+piece::piece(color playercolor) {
+    player = playercolor;
 }
 
 piece::piece(){
-    //ctor
+    player = white;
 }
 
-piece::~piece(){
-    //dtor
-}
-
-int piece::getID(){
-    return 0;
-}
-
-bool piece::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
-    return false;
-    //ctor
-}
-
-namespace pieces {
-
-int bauer::getID() {return id_bauer;}
-int laeufer::getID() {return id_laeufer;}
-int springer::getID() {return id_springer;}
-int turm::getID() {return id_turm;}
-int dame::getID() {return id_dame;}
-int koenig::getID() {return id_koenig;}
-int none::getID() {return id_none;}
-
-
-bool bauer::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
+bool piece::possible_move(coor from, coor to, piece*** spielfeld) {
     return false;
 }
 
-bool laeufer::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
-    return false;
+color piece::GetColour() {
+    return player;
 }
 
-bool springer::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
-    return false;
-}
+bool piece::check_line(coor from, coor to, piece*** spielfeld) {
 
-bool turm::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
     return false;
-}
-
-bool dame::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
-    return false;
-}
-
-bool koenig::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
-    return false;
-}
-
-bool none::possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]) {
-    return false;
-}
-
 }
 
 }

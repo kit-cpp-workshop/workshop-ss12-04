@@ -2,7 +2,7 @@
 #define CHESSGAME_H
 
 #include "general.h"
-#include "game/chessboard.h"
+#include "game/piece.h"
 
 namespace chess{
 
@@ -11,12 +11,17 @@ namespace chess{
 class chessgame
 {
     public:
-        chessgame(); /* Konstruktor erzeugt ein chessboard */
+        /* Konstruktor erzeugt ein chessboard */
+        chessgame();
+
+        /* Destruktor, löscht Brett. */
         ~chessgame();
+
         void run(); // hier drin steckt der Spielablauf: Abwechselnd weiß und schwarz ziehen, bis König geschlagen.
     protected:
     private:
-        bool current_player_color;
+
+        color current_player;
 };
 
 

@@ -13,75 +13,23 @@ class piece
         Daher ist diese Klasse auch nicht rein virtuell. */
         piece();
 
-        piece(bool piece_colour); // Figur mit Farbe erzeugen
-
-        virtual ~piece();
+        piece(color player); // Figur mit Farbe erzeugen
 
         /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to"
         auf dem übergebenem Array möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell check_diagonal oder check_linear auf, um zu testen, ob was im Weg steht */
-        virtual bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
+        virtual bool possible_move(coor from, coor to, piece*** spielfeld);
 
-        // Ausgabe zur Darstellung:
-        virtual int getID();
-        bool getcolour();
+        color GetColour();
 
     protected:
-        bool colour; //Die Farbe der Figur
+        color player; //Die Farbe der Figur
 
-        //Werden von "possible_move" von Dame, Läufer und Turm gebraucht, benutzt chessboard.occupied:
-        bool check_linear(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-        bool ckeck_diagonal(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-namespace pieces {
-
-class bauer : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
+        //Werden von "possible_move" von Dame, Läufer und Turm gebraucht:
+        bool check_line(coor from, coor to, piece*** spielfeld);
 
 };
-
-class laeufer : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-class springer : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-class dame : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-class koenig : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-class none : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-class turm : public piece {
-    int getID();
-    bool possible_move(coor from, coor to, piece spielfeld[chessboard_size][chessboard_size]);
-
-};
-
-
-}
 
 }
 }

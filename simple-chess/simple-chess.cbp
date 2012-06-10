@@ -36,6 +36,8 @@
 		<Unit filename="chess/chessgame.h" />
 		<Unit filename="chess/game/chessboard.cpp" />
 		<Unit filename="chess/game/chessboard.h" />
+		<Unit filename="chess/game/move.cpp" />
+		<Unit filename="chess/game/move.h" />
 		<Unit filename="chess/game/piece.cpp" />
 		<Unit filename="chess/game/piece.h" />
 		<Unit filename="chess/general.h" />
@@ -47,6 +49,15 @@
 			<envvars />
 			<lib_finder disable_auto="1" />
 			<debugger />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
