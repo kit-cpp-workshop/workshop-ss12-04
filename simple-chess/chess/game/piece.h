@@ -19,7 +19,7 @@ class piece
         auf dem übergebenem Array möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell check_diagonal oder check_linear auf, um zu testen, ob was im Weg steht */
-        virtual bool possible_move(coor from, coor to, piece*** spielfeld);
+        virtual bool possible_move(coor from, coor to, chessboard &spielfeld);
 
         color GetColour();
 
@@ -27,7 +27,7 @@ class piece
         color player; //Die Farbe der Figur
 
         //Werden von "possible_move" von Dame, Läufer und Turm gebraucht:
-        bool check_line(coor from, coor to, piece*** spielfeld);
+        bool check_line(coor from, coor to, chessboard &spielfeld);
 
 };
 
