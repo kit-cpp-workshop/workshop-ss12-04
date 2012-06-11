@@ -12,8 +12,7 @@ struct coor {
 
 // Damit man sich das nicht merken muss:
 enum color {white, black};
-//const bool color_white = true;
-//const bool color_black = false;
+enum chesspiece {none, pawn, rook, knight, bishop, queen, king};
 
 const unsigned int chessboard_size = 8;
 
