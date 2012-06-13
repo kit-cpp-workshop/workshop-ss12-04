@@ -19,7 +19,7 @@ private:
 enum color {white, black};
 enum chesspiece {none, pawn, rook, knight, bishop, queen, king};
 
-const unsigned int chessboard_size = 8;
+const int chessboard_size = 8;
 
 }
 #endif // GENERAL_H_INCLUDED
