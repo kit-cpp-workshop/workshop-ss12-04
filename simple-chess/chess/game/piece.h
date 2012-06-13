@@ -2,9 +2,13 @@
 #define PIECE_H
 
 #include "../general.h"
+#include "./chessboard.h"
+#include <cmath>
 
 namespace chess{
 namespace game {
+
+class chessboard;
 
 class piece
 {
@@ -34,7 +38,7 @@ namespace pieces {
 
 class none : public piece {
     public:
-        none(color player);
+        none(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
@@ -42,7 +46,7 @@ class none : public piece {
 
 class pawn : public piece {
     public:
-        pawn(color player);
+        pawn(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
@@ -50,7 +54,7 @@ class pawn : public piece {
 
 class rook : public piece {
     public:
-        rook(color player);
+        rook(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
@@ -58,7 +62,7 @@ class rook : public piece {
 
 class knight : public piece {
     public:
-        knight(color player);
+        knight(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
@@ -66,7 +70,7 @@ class knight : public piece {
 
 class bishop : public piece {
     public:
-        bishop(color player);
+        bishop(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
@@ -74,7 +78,7 @@ class bishop : public piece {
 
 class queen : public piece {
     public:
-        queen(color player);
+        queen(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
@@ -82,7 +86,7 @@ class queen : public piece {
 
 class king : public piece {
     public:
-        king(color player);
+        king(color playercolor);
         bool possible_move(coor from, coor to, chessboard &spielfeld);
         chesspiece GetPiece();
 };
