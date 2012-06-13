@@ -58,28 +58,77 @@ bool none::possible_move(coor from, coor to, chessboard &spielfeld) {
 }
 
 bool pawn::possible_move(coor from, coor to, chessboard &spielfeld) {
-  return false;
+
+  // Steht der Bauer noch auf der Grundlinie?
+  bool grundlinie = (((player==white) && (from.y() == 1)) || ((player==black) && (from.y() == chessboard_size - 2)));
+
+  //noch kein en passant ...
+
+  // wo ist "vorne"?
+  int dy = ((player==white) ? 1 : -1);
+
+  // Schlägt der Bauer eine Figur?
+  bool schlagen = (spielfeld.GetPiece(to).GetPiece()!=chess::none);
+  // dann nur diagonal nach vorne.
+  bool diagonal = ((to.y() - from.y()) == dy) && (std::abs(to.x() - from.x()) == 1);
+  if(schlagen && !diagonal) return false;
+
+  //beim nicht schlagen, von grundlinie 2, sonst 1 geradeaus:
+  bool geradeaus = (to.y() - from.y() == dy * (grundlinie ? 2 : 1));
+  if(!schlagen && !geradeaus) return false;
+
+  return true;
 }
 
 bool rook::possible_move(coor from, coor to, chessboard &spielfeld) {
-  return false;
+
+  // nur geradlinig bewegen:
+  bool geradlinig = (from.x()-to.x() == 0) || (from.y()-to.y() == 0);
+  if(!geradlinig) return false;
+
+  //keine Figur dazwischen:
+  if(!check_line(from, to, spielfeld)) return false;
+
+  return true;
 }
 
 bool knight::possible_move(coor from, coor to, chessboard &spielfeld) {
-  return false;
+
+  // nur "über eck", wenn dx^2 + dy^2 == 5 ist:
+  bool eck = std::pow(to.x() - from.x(),2) + std::pow(to.y() - from.y(),2) == 5;
+  if(!eck) return false;
+
+  return true;
 }
 
 bool bishop::possible_move(coor from, coor to, chessboard &spielfeld) {
-  return false;
+
+  // nur diagonal bewegen:
+  bool diagonal = (std::abs(from.x()-to.x()) == std::abs(from.y()-to.y()));
+  if(!diagonal) return false;
+
+  //keine Figur dazwischen:
+  if(!check_line(from, to, spielfeld)) return false;
+
+  return true;
 }
 
 
 bool queen::possible_move(coor from, coor to, chessboard &spielfeld) {
-  return false;
+
+  //diagonal und linear, keine Figur dazwischen:
+  if(!check_line(from, to, spielfeld)) return false;
+
+  return true;
 }
 
 bool king::possible_move(coor from, coor to, chessboard &spielfeld) {
-  return false;
+
+  // nur ein Feld bewegen:
+  bool einfeld = (std::abs(from.x()-to.x()) <= 1) && (std::abs(from.y()-to.y()) <= 1);
+  if(!einfeld) return false;
+
+  return true;
 }
 
 
