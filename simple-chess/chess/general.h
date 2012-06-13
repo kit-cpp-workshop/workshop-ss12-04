@@ -11,8 +11,8 @@ public:
   int x();
   int y();
 private:
-    int x;
-    int y;
+    int pos_x;
+    int pos_y;
 };
 
 // Damit man sich das nicht merken muss:

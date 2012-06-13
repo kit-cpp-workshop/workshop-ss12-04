@@ -1,14 +1,17 @@
 
 #include "general.h"
 
+namespace chess {
 
 coor::coor(int nx, int ny) {
-  if(nx<0) x=0;
-  if(nx>chessboard_size-1) x = chessboard_size-1;
+  if(nx<0) pos_x=0;
+  if(nx>chessboard_size-1) pos_x = chessboard_size-1;
 
-  if(ny<0) y=0;
-  if(ny>chessboard_size-1) y = chessboard_size-1;
+  if(ny<0) pos_y=0;
+  if(ny>chessboard_size-1) pos_y = chessboard_size-1;
 }
 
-int coor::x() {return x;}
-int coor::y() {return y;}
+int coor::x() {return pos_x;}
+int coor::y() {return pos_y;}
+
+}
