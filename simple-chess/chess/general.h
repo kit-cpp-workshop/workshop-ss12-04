@@ -4,8 +4,13 @@
 // General needed things
 namespace chess {
 
-
-struct coor {
+/* Klasse zum Verwalten der Koordinaten, x und y immer zwischen 0 und chessboard_size */
+class coor {
+public:
+  coor(int nx, int ny);
+  int x();
+  int y();
+private:
     int x;
     int y;
 };
