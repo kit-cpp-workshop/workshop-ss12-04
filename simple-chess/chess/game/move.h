@@ -20,7 +20,7 @@ class move_chain {
 
         /* Wendet diesen Zug schließlich an. Wendet ggf. den vorher auszuführenden Zug an.
         Mit der Angabe des konkreten Spielfeld-Arrays werden die Züge darauf ausgeführt. */
-        virtual void Apply(piece* spielfeld[chessboard_size][chessboard_size]) = 0;
+        virtual void Apply(piece* spielfeld[chessboard_size][chessboard_size], piece*) = 0;
 
         /* Destruktor löscht das angehängte Element (dessen Destruktor löscht das weitere usw ... */
         virtual ~move_chain();
@@ -44,7 +44,7 @@ class move : public move_chain {
         Da über die `chessboard`-Klasse nur abfragen möglich sind, ist noch keine Manipulation möglich. */
         bool CheckMove(chessboard &spielfeld);
 
-        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
+        void Apply(piece* spielfeld[chessboard_size][chessboard_size], piece* nonepiece);
     protected:
         coor source, dest;
         color playercolor;
@@ -54,7 +54,7 @@ class remove : public move_chain {
     public:
         /* Konstruktor, löscht eine Figur auf `field` vom dem Spielfeld.*/
         remove(coor field);
-        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
+        void Apply(piece* spielfeld[chessboard_size][chessboard_size], piece* nonepiece);
     private:
         coor chessfield;
 
@@ -64,7 +64,7 @@ class insert : public move_chain {
     public:
         /* Konstruktor, fügt eine Figur auf `field` ins Spielfeld ein. */
         insert(coor field, piece &figur);
-        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
+        void Apply(piece* spielfeld[chessboard_size][chessboard_size], piece *nonepiece);
     private:
         coor chessfield;
         piece* chessfigure;

@@ -41,21 +41,21 @@ insert::insert(coor field, piece &figur) : chessfield(field), chessfigure(&figur
 }
 
 //Apply-Funktionen: Wenn vorhanden, erst angehängten Zug anwenden.
-void move::Apply(piece* spielfeld[chessboard_size][chessboard_size]){
-  if(PreviousMove!=0) PreviousMove->Apply(spielfeld);
+void move::Apply(piece* spielfeld[chessboard_size][chessboard_size], piece *nonepiece){
+  if(PreviousMove!=0) PreviousMove->Apply(spielfeld, nonepiece);
   spielfeld[dest.x()][dest.y()]=spielfeld[source.x()][source.y()];
   delete spielfeld[source.x()][source.y()];
-  spielfeld[source.x()][source.y()]=0;
+  spielfeld[source.x()][source.y()]=nonepiece;
 }
 
-void remove::Apply(piece* spielfeld[chessboard_size][chessboard_size]){
-  if(PreviousMove!=0) PreviousMove->Apply(spielfeld);
+void remove::Apply(piece* spielfeld[chessboard_size][chessboard_size], piece *nonepiece){
+  if(PreviousMove!=0) PreviousMove->Apply(spielfeld, nonepiece);
   delete spielfeld[chessfield.x()][chessfield.y()];
-  spielfeld[chessfield.x()][chessfield.y()]=0;
+  spielfeld[chessfield.x()][chessfield.y()]=nonepiece;
 }
 
-void insert::Apply(piece* spielfeld[chessboard_size][chessboard_size]){
-  if(PreviousMove!=0) PreviousMove->Apply(spielfeld);
+void insert::Apply(piece* spielfeld[chessboard_size][chessboard_size], piece *nonepiece){
+  if(PreviousMove!=0) PreviousMove->Apply(spielfeld, nonepiece);
   spielfeld[chessfield.x()][chessfield.y()]=chessfigure;
 }
 
