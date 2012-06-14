@@ -24,7 +24,7 @@ class chessboard
         ~chessboard();
 
         /* Gibt die Figur an der Position zurück. */
-        piece GetPiece(coor position);
+        piece* GetPiece(coor position);
 
         /* Wendet einen Zug an, damit nur `move` was ändern kann */
         bool ApplyMove(move &Zug);

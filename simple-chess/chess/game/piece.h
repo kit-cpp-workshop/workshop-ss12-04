@@ -16,16 +16,16 @@ class piece
         /* Default-Konstruktor, für initialisierung des Spielfelds benötigt.
         Daher ist diese Klasse auch nicht rein virtuell.
         Generell bezeichnet `piece` eine nicht vorhandene Figur, also ein leeres Feld. */
-        piece();
+        //piece();
         virtual ~piece(){};
         /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to"
         auf dem übergebenem Array möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell `check_line` auf, um zu testen, ob was im Weg steht */
-        virtual bool possible_move(coor, coor, chessboard);
+        virtual bool possible_move(coor, coor, chessboard&)=0;
 
         color GetColour();
-        virtual chesspiece GetPiece();
+        virtual chesspiece GetPiece()=0;
     protected:
         color player; //Die Farbe der Figur
 
@@ -39,7 +39,7 @@ namespace pieces {
 class none : public piece {
     public:
         none(color playercolor);
-        bool possible_move(coor, coor, chessboard);
+        bool possible_move(coor, coor, chessboard&);
         chesspiece GetPiece();
 };
 
@@ -63,7 +63,7 @@ class rook : public piece {
 class knight : public piece {
     public:
         knight(color playercolor);
-        bool possible_move(coor from, coor to, chessboard);
+        bool possible_move(coor from, coor to, chessboard&);
         chesspiece GetPiece();
 };
 
@@ -87,7 +87,7 @@ class queen : public piece {
 class king : public piece {
     public:
         king(color playercolor);
-        bool possible_move(coor from, coor to, chessboard);
+        bool possible_move(coor from, coor to, chessboard&);
         chesspiece GetPiece();
 };
 

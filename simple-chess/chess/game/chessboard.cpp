@@ -13,8 +13,8 @@ chessboard::~chessboard(){
   delete NullFigure;
 }
 
-piece chessboard::GetPiece(coor position) {
-  return *spielfeld[position.x()][position.y()];
+piece* chessboard::GetPiece(coor position) {
+  return spielfeld[position.x()][position.y()];
 }
 
 bool chessboard::ApplyMove(move &Zug){
@@ -58,22 +58,22 @@ void chessboard::setStartPosition(){
         spielfeld[ix][iy] = new pieces::pawn(currentColor);
 
       // Grundlinien:
-      if((iy==1)||(iy==chessboard_size-1)) {
+      if((iy==0)||(iy==chessboard_size-1)) {
 
         //Türme:
-        if((ix==1)||(ix==chessboard_size-1))
+        if((ix==0)||(ix==chessboard_size-1))
           spielfeld[ix][iy] = new pieces::rook(currentColor);
 
         //Springer:
-        if((ix==2)||(ix==chessboard_size-2))
+        if((ix==1)||(ix==chessboard_size-2))
           spielfeld[ix][iy] = new pieces::knight(currentColor);
 
         //Läufer:
-        if((ix==3)||(ix==chessboard_size-3))
+        if((ix==2)||(ix==chessboard_size-3))
           spielfeld[ix][iy] = new pieces::bishop(currentColor);
 
         //Dame:
-        if(ix==4)
+        if(ix==3)
           spielfeld[ix][iy] = new pieces::queen(currentColor);
 
         //Dame:

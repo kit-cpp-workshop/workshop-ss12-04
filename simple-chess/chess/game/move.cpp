@@ -44,7 +44,6 @@ insert::insert(coor field, piece &figur) : chessfield(field), chessfigure(&figur
 void move::Apply(piece* spielfeld[chessboard_size][chessboard_size], piece *nonepiece){
   if(PreviousMove!=0) PreviousMove->Apply(spielfeld, nonepiece);
   spielfeld[dest.x()][dest.y()]=spielfeld[source.x()][source.y()];
-  delete spielfeld[source.x()][source.y()];
   spielfeld[source.x()][source.y()]=nonepiece;
 }
 
@@ -70,12 +69,12 @@ Da über die `chessboard`-Klasse nur abfragen möglich sind, ist noch keine Mani
 bool move::CheckMove(chessboard &spielfeld) {
 
   // stimmt die Farbe beim Startfeld?:
-  bool colorcheck = (spielfeld.GetPiece(source).GetColour() == playercolor);
+  bool colorcheck = (spielfeld.GetPiece(source)->GetPiece()!=none) && (spielfeld.GetPiece(source)->GetColour() == playercolor);
 
   // stimmt das Zielfeld und wird geschlagen?
   bool targetcheck, throwfigure;
-  if(spielfeld.GetPiece(dest).GetPiece()!=none){
-    if(spielfeld.GetPiece(dest).GetColour()!=playercolor)
+  if(spielfeld.GetPiece(dest)->GetPiece()!=none){
+    if(spielfeld.GetPiece(dest)->GetColour()!=playercolor)
       throwfigure = targetcheck = true;
     else
       throwfigure = targetcheck = false;
@@ -86,7 +85,7 @@ bool move::CheckMove(chessboard &spielfeld) {
   }
 
   // ist der Zug geometrisch möglisch?
-  bool geometrycheck = spielfeld.GetPiece(source).possible_move(source,dest,spielfeld);
+  bool geometrycheck = spielfeld.GetPiece(source)->possible_move(source,dest,spielfeld);
 
   // Abbrechen, wenn eine Bedingung nicht erfüllt:
   if(!colorcheck || !targetcheck || !geometrycheck) return false;

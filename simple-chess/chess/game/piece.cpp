@@ -4,10 +4,10 @@ namespace chess {
 namespace game {
 
 //piece::piece(color playercolor) {player = playercolor;}
-piece::piece(){player = white;}
-bool piece::possible_move(coor, coor, chessboard) {return false;}
+//piece::piece(){player = white;}
+//bool piece::possible_move(coor, coor, chessboard) {return false;}
 color piece::GetColour() {return player;}
-chesspiece piece::GetPiece() {return chess::none;}
+//chesspiece piece::GetPiece() {return chess::none;}
 
 // Funktion, die von anderen verwendet wird:
 bool piece::check_line(coor from, coor to, chessboard &spielfeld) {
@@ -29,7 +29,7 @@ bool piece::check_line(coor from, coor to, chessboard &spielfeld) {
     for(int iy=from.y()+dy; iy<= to.y()-dy; iy+=dy) {
       // Zug nicht möglich, wenn Figur im Weg steht.
       coor position(ix,iy);
-      if(spielfeld.GetPiece(position).GetPiece()!=chess::none) return false;
+      if(spielfeld.GetPiece(position)->GetPiece()!=chess::none) return false;
     }
   }
   return true;
@@ -56,7 +56,7 @@ chesspiece queen::GetPiece() {return chess::queen;}
 chesspiece king::GetPiece() {return chess::king;}
 
 // Überprüfungen:
-bool none::possible_move(coor, coor, chessboard) {
+bool none::possible_move(coor, coor, chessboard&) {
   return false;
 }
 
@@ -71,13 +71,16 @@ bool pawn::possible_move(coor from, coor to, chessboard &spielfeld) {
   int dy = ((player==white) ? 1 : -1);
 
   // Schlägt der Bauer eine Figur?
-  bool schlagen = (spielfeld.GetPiece(to).GetPiece()!=chess::none);
+  bool schlagen = (spielfeld.GetPiece(to)->GetPiece()!=chess::none);
   // dann nur diagonal nach vorne.
   bool diagonal = ((to.y() - from.y()) == dy) && (std::abs(to.x() - from.x()) == 1);
   if(schlagen && !diagonal) return false;
 
   //beim nicht schlagen, von grundlinie 2, sonst 1 geradeaus:
-  bool geradeaus = (to.y() - from.y() == dy * (grundlinie ? 2 : 1));
+  bool geradeaus = (to.y() - from.y() == dy);
+  if(grundlinie)
+    geradeaus |= (to.y() - from.y() == dy*2);
+
   if(!schlagen && !geradeaus) return false;
 
   return true;
@@ -95,7 +98,7 @@ bool rook::possible_move(coor from, coor to, chessboard &spielfeld) {
   return true;
 }
 
-bool knight::possible_move(coor from, coor to, chessboard) {
+bool knight::possible_move(coor from, coor to, chessboard&) {
 
   // nur "über eck", wenn dx^2 + dy^2 == 5 ist:
   bool eck = std::pow(to.x() - from.x(),2) + std::pow(to.y() - from.y(),2) == 5;
@@ -125,7 +128,7 @@ bool queen::possible_move(coor from, coor to, chessboard &spielfeld) {
   return true;
 }
 
-bool king::possible_move(coor from, coor to, chessboard) {
+bool king::possible_move(coor from, coor to, chessboard &) {
 
   // nur ein Feld bewegen:
   int distance = std::pow(to.x() - from.x(),2) + std::pow(to.y() - from.y(),2);
