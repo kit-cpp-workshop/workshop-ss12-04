@@ -44,16 +44,10 @@ class move : public move_chain {
         Da über die `chessboard`-Klasse nur abfragen möglich sind, ist noch keine Manipulation möglich. */
         bool CheckMove(chessboard &spielfeld);
 
-        // Zur Überprüfung durch chessboard, damit nur geprüfte Züge angewendet werden.
-        bool isChecked();
-
-
         void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
     protected:
         coor source, dest;
         color playercolor;
-        bool checked;
-
 };
 
 class remove : public move_chain {

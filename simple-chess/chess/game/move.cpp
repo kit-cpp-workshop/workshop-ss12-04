@@ -21,17 +21,14 @@ void move_chain::Append(move_chain* move_object, bool last){
   }
 }
 
-bool move::isChecked() {
-  return checked;
-}
-
+// Destruktor:
 move_chain::~move_chain() {
   if(PreviousMove!=0)
     delete PreviousMove;
 }
 
 // Konstruktoren:
-move::move(coor from, coor to, color player) : source(from), dest(to), playercolor(player), checked(false) {
+move::move(coor from, coor to, color player) : source(from), dest(to), playercolor(player){
   PreviousMove=0;
 }
 
@@ -43,19 +40,22 @@ insert::insert(coor field, piece &figur) : chessfield(field), chessfigure(&figur
   PreviousMove=0;
 }
 
-//Apply-Funktionen:
+//Apply-Funktionen: Wenn vorhanden, erst angehängten Zug anwenden.
 void move::Apply(piece* spielfeld[chessboard_size][chessboard_size]){
+  if(PreviousMove!=0) PreviousMove->Apply(spielfeld);
   spielfeld[dest.x()][dest.y()]=spielfeld[source.x()][source.y()];
   delete spielfeld[source.x()][source.y()];
   spielfeld[source.x()][source.y()]=0;
 }
 
 void remove::Apply(piece* spielfeld[chessboard_size][chessboard_size]){
+  if(PreviousMove!=0) PreviousMove->Apply(spielfeld);
   delete spielfeld[chessfield.x()][chessfield.y()];
   spielfeld[chessfield.x()][chessfield.y()]=0;
 }
 
 void insert::Apply(piece* spielfeld[chessboard_size][chessboard_size]){
+  if(PreviousMove!=0) PreviousMove->Apply(spielfeld);
   spielfeld[chessfield.x()][chessfield.y()]=chessfigure;
 }
 
@@ -96,8 +96,6 @@ bool move::CheckMove(chessboard &spielfeld) {
     remove* destremove = new remove(dest);
     this->Append(destremove);
   }
-
-  checked=true;
   return true;
 }
 
