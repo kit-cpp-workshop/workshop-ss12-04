@@ -18,6 +18,9 @@ bool piece::check_line(coor from, coor to, chessboard &spielfeld) {
   int dx = delta_x==0 ? 0 : delta_x / (to.x() - from.x());
   int dy = delta_y==0 ? 0 : delta_y / (to.y() - from.y());
 
+  // Abbrechen, wenn keine Bewegung:
+  if((dx==0)&&(dy==0)) return false;
+
   // Abbrechen, wenn nicht Linie oder Diagonale:
   if(!((delta_x==delta_y) || ((delta_y!=0) && (delta_x==0))) || ((delta_x!=0) && (delta_y == 0))) return false;
 
@@ -125,7 +128,8 @@ bool queen::possible_move(coor from, coor to, chessboard &spielfeld) {
 bool king::possible_move(coor from, coor to, chessboard) {
 
   // nur ein Feld bewegen:
-  bool einfeld = (std::abs(from.x()-to.x()) <= 1) && (std::abs(from.y()-to.y()) <= 1);
+  int distance = std::pow(to.x() - from.x(),2) + std::pow(to.y() - from.y(),2);
+  bool einfeld =  (distance== 1) || (distance==2);
   if(!einfeld) return false;
 
   return true;
