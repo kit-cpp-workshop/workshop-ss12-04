@@ -10,13 +10,14 @@ namespace game {
 
 
 class move;
+class piece;
 
 /* Diese Klasse enthält das Spielbrett als Figuren-Array.
 */
 class chessboard
 {
     public:
-        /* Füllt das Schachbrett mit der Startaufstellung */
+        /* Konstruktor */
         chessboard();
 
         /* Löscht das Schachbrett und seine Figuren. */
@@ -31,6 +32,11 @@ class chessboard
     private:
         /* Das eigentliche Spielfeld, als Array von Figuren */
         game::piece* spielfeld[chessboard_size][chessboard_size];
+
+        /* Füllt das Schachbrett mit der Startaufstellung oder löscht es */
+        void setStartPosition();
+        void cleanBoard();
+        piece* NullFigure;
 
 };
 
