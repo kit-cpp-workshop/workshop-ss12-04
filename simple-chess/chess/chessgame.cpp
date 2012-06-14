@@ -13,13 +13,15 @@ chessgame::~chessgame(){
 }
 
 void chessgame::run(){
-  iface->draw_board(*Spielbrett);
 
-  game::move* nextMove;
+  game::move* nextMove=0;
 
   while(true) {
+    // Brett ausgeben:
+    iface->draw_board(*Spielbrett);
+
     // Zug einlesen...
-    nextMove = iface->read_move(current_player, *Spielbrett);
+    nextMove = iface->read_move(current_player);
     // bis gültiger Zug
     if(!Spielbrett->ApplyMove(*nextMove)) continue;
 

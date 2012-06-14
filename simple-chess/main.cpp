@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-  chess::ui::UserInterface* iface = 0;
+  chess::ui::UserInterface* iface = new chess::ui::uis::CommandLine();
 
   chess::chessgame* Game = new chess::chessgame(iface);
 
