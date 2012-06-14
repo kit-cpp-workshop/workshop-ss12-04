@@ -17,12 +17,12 @@ class piece
         Daher ist diese Klasse auch nicht rein virtuell.
         Generell bezeichnet `piece` eine nicht vorhandene Figur, also ein leeres Feld. */
         piece();
-
+        virtual ~piece(){};
         /* Überprüfung, ob ein Bewegen rein geometrisch von "from" nach "to"
         auf dem übergebenem Array möglich ist.
         Für jede Figur verschieden.
         Ruft eventuell `check_line` auf, um zu testen, ob was im Weg steht */
-        virtual bool possible_move(coor from, coor to, chessboard &spielfeld);
+        virtual bool possible_move(coor, coor, chessboard);
 
         color GetColour();
         virtual chesspiece GetPiece();
@@ -39,7 +39,7 @@ namespace pieces {
 class none : public piece {
     public:
         none(color playercolor);
-        bool possible_move(coor from, coor to, chessboard &spielfeld);
+        bool possible_move(coor, coor, chessboard);
         chesspiece GetPiece();
 };
 
@@ -63,7 +63,7 @@ class rook : public piece {
 class knight : public piece {
     public:
         knight(color playercolor);
-        bool possible_move(coor from, coor to, chessboard &spielfeld);
+        bool possible_move(coor from, coor to, chessboard);
         chesspiece GetPiece();
 };
 
@@ -87,7 +87,7 @@ class queen : public piece {
 class king : public piece {
     public:
         king(color playercolor);
-        bool possible_move(coor from, coor to, chessboard &spielfeld);
+        bool possible_move(coor from, coor to, chessboard);
         chesspiece GetPiece();
 };
 

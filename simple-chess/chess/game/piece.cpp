@@ -5,7 +5,7 @@ namespace game {
 
 //piece::piece(color playercolor) {player = playercolor;}
 piece::piece(){player = white;}
-bool piece::possible_move(coor from, coor to, chessboard &spielfeld) {return false;}
+bool piece::possible_move(coor, coor, chessboard) {return false;}
 color piece::GetColour() {return player;}
 chesspiece piece::GetPiece() {return chess::none;}
 
@@ -53,7 +53,7 @@ chesspiece queen::GetPiece() {return chess::queen;}
 chesspiece king::GetPiece() {return chess::king;}
 
 // Überprüfungen:
-bool none::possible_move(coor from, coor to, chessboard &spielfeld) {
+bool none::possible_move(coor, coor, chessboard) {
   return false;
 }
 
@@ -92,7 +92,7 @@ bool rook::possible_move(coor from, coor to, chessboard &spielfeld) {
   return true;
 }
 
-bool knight::possible_move(coor from, coor to, chessboard &spielfeld) {
+bool knight::possible_move(coor from, coor to, chessboard) {
 
   // nur "über eck", wenn dx^2 + dy^2 == 5 ist:
   bool eck = std::pow(to.x() - from.x(),2) + std::pow(to.y() - from.y(),2) == 5;
@@ -122,7 +122,7 @@ bool queen::possible_move(coor from, coor to, chessboard &spielfeld) {
   return true;
 }
 
-bool king::possible_move(coor from, coor to, chessboard &spielfeld) {
+bool king::possible_move(coor from, coor to, chessboard) {
 
   // nur ein Feld bewegen:
   bool einfeld = (std::abs(from.x()-to.x()) <= 1) && (std::abs(from.y()-to.y()) <= 1);
