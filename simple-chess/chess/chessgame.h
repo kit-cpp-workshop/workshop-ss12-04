@@ -3,6 +3,8 @@
 
 #include "general.h"
 #include "game/piece.h"
+#include "game/chessboard.h"
+#include "ui/userinterface.h"
 
 namespace chess{
 
@@ -12,7 +14,7 @@ class chessgame
 {
     public:
         /* Konstruktor erzeugt ein chessboard */
-        chessgame();
+        chessgame(ui::UserInterface* Interface);
 
         /* Destruktor, löscht Brett. */
         ~chessgame();
@@ -20,8 +22,9 @@ class chessgame
         void run(); // hier drin steckt der Spielablauf: Abwechselnd weiß und schwarz ziehen, bis König geschlagen.
     protected:
     private:
-
         color current_player;
+        game::chessboard* Spielbrett;
+        ui::UserInterface* iface;
 };
 
 
