@@ -10,17 +10,20 @@ namespace chess {
 namespace game {
 
 class chessboard;
+class piece;
 
 class move_chain {
     public:
         /* Fügt dem Zug einen vorher auszuführenden Zug hinzu.
-        Diesem wird automatisch dasselbe Brett zugewiesen. */
-        void Append(move_chain* move_object);
+        Der Zug wird hinten angehängt, wenn nicht anders angegeben. */
+        void Append(move_chain* move_object, bool last = true);
 
         /* Wendet diesen Zug schließlich an. Wendet ggf. den vorher auszuführenden Zug an.
         Mit der Angabe des konkreten Spielfeld-Arrays werden die Züge darauf ausgeführt. */
-        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
+        virtual void Apply(piece* spielfeld[chessboard_size][chessboard_size]) = 0;
 
+        /* Destruktor löscht das angehängte Element (dessen Destruktor löscht das weitere usw ... */
+        virtual ~move_chain();
     protected:
         move_chain* PreviousMove;
 
@@ -29,21 +32,27 @@ class move_chain {
 
 class move : public move_chain {
     public:
-        /* Konstruktor, erzeugt einen Zug von `from` nach `to` auf dem Spielfeld.*/
-        move(coor from, coor to, color player, chessboard &spielfeld);
+        /* Konstruktor, erzeugt einen Zug von `from` nach `to`.*/
+        move(coor from, coor to, color player);
 
-        /* Überprüft den Zug, ob Start- und Endfeld möglich sind
+        /* Überprüft den Zug, ob Start- und Endfeld auf dem Spielfeld möglich sind
         und ob es sich um einen besonderen Zug handelt.
         Prüft, ob Figurenregeln zutreffen.
         Beim Schlagen oder bei besonderen Zügen (z.B. Rochade) werden
         die zusätzlichen Züge (Figur vom Spielfeld nehmen usw... ) dem Zug hinzugefügt,
         sodass schließlich alle Informationen des Zuges enthalten sind.
         Da über die `chessboard`-Klasse nur abfragen möglich sind, ist noch keine Manipulation möglich. */
-        bool CheckMove();
+        bool CheckMove(chessboard &spielfeld);
 
+        // Zur Überprüfung durch chessboard, damit nur geprüfte Züge angewendet werden.
+        bool isChecked();
+
+
+        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
     protected:
-        coor from, to;
-        color player;
+        coor source, dest;
+        color playercolor;
+        bool checked;
 
 };
 
@@ -51,8 +60,9 @@ class remove : public move_chain {
     public:
         /* Konstruktor, löscht eine Figur auf `field` vom dem Spielfeld.*/
         remove(coor field);
+        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
     private:
-        coor field;
+        coor chessfield;
 
 };
 
@@ -60,9 +70,10 @@ class insert : public move_chain {
     public:
         /* Konstruktor, fügt eine Figur auf `field` ins Spielfeld ein. */
         insert(coor field, piece &figur);
+        void Apply(piece* spielfeld[chessboard_size][chessboard_size]);
     private:
-        coor field;
-
+        coor chessfield;
+        piece* chessfigure;
 };
 
 }
