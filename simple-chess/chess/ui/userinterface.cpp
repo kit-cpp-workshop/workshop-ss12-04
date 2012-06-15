@@ -42,49 +42,62 @@ game::move* CommandLine::read_move(color player_color){
 
 
 void CommandLine::draw_board(game::chessboard &Spielbrett) {
+  std::cout << std::endl << "   A   B   C   D   E   F   G   H" << std::endl;
+  std::cout <<              " ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗ " << std::endl;
+
   for(int iy=chessboard_size-1;iy>=0;iy--) {
+    std::cout << iy+1 << "║";
     for(int ix=0;ix<chessboard_size;ix++) {
       coor Position(ix,iy);
+      std::cout << " ";
       if(Spielbrett.GetPiece(Position)->GetColour()==white) {
         switch(Spielbrett.GetPiece(Position)->GetPiece()){
           case none:
-            std::cout << "."; break;
+            std::cout << " "; break;
           case pawn:
-            std::cout << "P"; break;
+            std::cout << "♙"; break;
           case rook:
-            std::cout << "R"; break;
+            std::cout << "♖"; break;
           case knight:
-            std::cout << "N"; break;
+            std::cout << "♘"; break;
           case bishop:
-            std::cout << "B"; break;
+            std::cout << "♗"; break;
           case queen:
-            std::cout << "Q"; break;
+            std::cout << "♕"; break;
           case king:
-            std::cout << "K"; break;
+            std::cout << "♔"; break;
         }
       } else {
         switch(Spielbrett.GetPiece(Position)->GetPiece()){
           case none:
-            std::cout << "."; break;
+            std::cout << " "; break;
           case pawn:
-            std::cout << "p"; break;
+            std::cout << "♟"; break;
           case rook:
-            std::cout << "r"; break;
+            std::cout << "♜"; break;
           case knight:
-            std::cout << "n"; break;
+            std::cout << "♞"; break;
           case bishop:
-            std::cout << "b"; break;
+            std::cout << "♝"; break;
           case queen:
-            std::cout << "q"; break;
+            std::cout << "♛"; break;
           case king:
-            std::cout << "k"; break;
+            std::cout << "♚"; break;
         }
 
       }
+      if(ix<chessboard_size-1)
+        std::cout << " │";
+      else
+        std::cout << " ";
     }
-    std::cout << std::endl;
+    std::cout << "║" << iy+1 << std::endl;
+    if(iy > 0)
+      std::cout << " ╟───┼───┼───┼───┼───┼───┼───┼───╢" << std::endl;
   }
-  std::cout << std::endl;
+
+  std::cout << " ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝ " << std::endl;
+  std::cout << "   A   B   C   D   E   F   G   H" << std::endl << std::endl;
 }
 }
 }
