@@ -6,9 +6,7 @@
  */
 
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cmath>
 
 #include "dame.h"
 
@@ -20,8 +18,8 @@ Dame::~Dame()
 
 bool Dame::bewegungmoeglich(int a,int b,brett* brett)
 {
-	int deltay=abs(b-y);
-	int deltax=abs(a-x);
+	int deltay=std::abs(b-y);
+	int deltax=std::abs(a-x);
 
 	//links-rechts
 	if ((deltax!=0) && (deltay==0))

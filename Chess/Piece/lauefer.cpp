@@ -6,9 +6,7 @@
  */
 
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cmath>
 
 
 #include "lauefer.h"
@@ -21,8 +19,8 @@ Laeufer::~Laeufer()
 
 bool Laeufer::bewegungmoeglich(int a,int b,brett* brett)
 {
-	int deltay=abs(b-y);
-	int deltax=abs(a-x);
+	int deltay=std::abs(b-y);
+	int deltax=std::abs(a-x);
 
 	//diagonal
 	if (deltax==deltay)

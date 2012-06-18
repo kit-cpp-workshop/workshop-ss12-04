@@ -6,9 +6,7 @@
  */
 
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cmath>
 
 
 #include "koenig.h"
@@ -21,8 +19,8 @@ Koenig::~Koenig()
 
 bool Koenig::bewegungmoeglich(int a,int b,brett* brett)
 {
-	int deltay=abs(b-y);
-	int deltax=abs(a-x);
+	int deltay=std::abs(b-y);
+	int deltax=std::abs(a-x);
 
 	if ((deltax<=1) && (deltay<=1) && (brett->besitzer(a,b)!=besitzer)) { return true; }
 return false;

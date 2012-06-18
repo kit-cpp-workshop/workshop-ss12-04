@@ -6,10 +6,7 @@
  */
 
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-
+#include <cmath>
 #include "bauer.h"
 
 
@@ -20,8 +17,8 @@ Bauer::~Bauer()
 
 bool Bauer::bewegungmoeglich(int a,int b,brett* brett)
 {
-	int deltay=abs(b-y);
-	int deltax=abs(a-x);
+	int deltay=std::abs(b-y);
+	int deltax=std::abs(a-x);
 
 	if (besitzer==1)
 	{
