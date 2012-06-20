@@ -46,3 +46,9 @@ void Interface::ausgabe(brett* b)
 	}
 
 }
+
+void Interface::winner(int player)
+{
+
+}
+

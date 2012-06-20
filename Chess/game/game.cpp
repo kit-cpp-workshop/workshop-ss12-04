@@ -50,6 +50,8 @@ Game::Game()
 
 	end=false;
 	activeplayer=1;
+
+	aus.ausgabe(b);
 	return;
 }
 
@@ -86,6 +88,7 @@ void Game::zug()
 		if ((k1==false) || (k2==false))
 		{
 			end=true;
+			aus.winner(activeplayer);
 			std::cout << "Spieler " << activeplayer << " hat gewonnen." << std::endl;
 		}
 

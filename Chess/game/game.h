@@ -17,7 +17,7 @@ class Game
 {
 private:
 	brett* b;
-	Interface aus;
+	Interfaceb aus;
 	int activeplayer;
 	bool end;
 	int besitzer(int x,int y);

@@ -11,8 +11,14 @@
 #include "Interface/interfaceb.h"
 #include "Game/game.h"
 
-int main()
-{
+
+#ifdef _WIN32
+#include <windows.h>
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCMd) {
+#else
+int main() {
+#endif
 	Game Spiel;
 	Spiel.zug();
+	return true;
 }

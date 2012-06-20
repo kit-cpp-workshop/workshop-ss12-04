@@ -5,21 +5,29 @@
  *      Author: Thomas
  */
 
-#ifndef INTERFACE_H_
-#define INTERFACE_H_
+#ifndef INTERFACEb_H_
+#define INTERFACEb_H_
+
 
 #include <string>
+#include <SDL/SDL.h>
 #include "../game/brett.h"
 
-class Interface
+class Interfaceb
 {
 public:
 	void ausgabe(brett* b);
 	void einlesen(int p);
 	void winner(int player);
+	Interfaceb();
+	~Interfaceb();
 
 	char p1a,p2a;
 	int p1b,p2b;
+
+private:
+	SDL_Surface* display;
+
 };
 
 
