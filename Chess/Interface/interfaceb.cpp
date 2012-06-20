@@ -75,22 +75,23 @@ void Interfaceb::einlesen(int p)
 			break;
 		case SDL_QUIT:
 			exitLoop=true;
+			exit(-1);
 			break;
 		default:
 			break;
 		}
 	}
 
-	std::cout << start.x << "-" << start.y << std::endl;
-	std::cout << ende.x << "-" << ende.y << std::endl;
+	//std::cout << start.x << "-" << start.y << std::endl;
+	//std::cout << ende.x << "-" << ende.y << std::endl;
 
 	int sx=(int) ((start.x-51)/66);
 	int sy=(int) ((start.y-61)/66);
 	int ex=(int) ((ende.x-51)/66);
 	int ey=(int) ((ende.y-51)/66);
 
-	std::cout << sx << "-" << sy << std::endl;
-	std::cout << ex << "-" << ey << std::endl;
+	//std::cout << sx << "-" << sy << std::endl;
+	//std::cout << ex << "-" << ey << std::endl;
 
 	p1a=char(int('a')+sx);
 	p1b=8-sy;
