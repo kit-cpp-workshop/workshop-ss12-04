@@ -32,6 +32,8 @@ Interfaceb::Interfaceb()
 		exit(-1);
 	}
 
+	SDL_WM_SetCaption("Schach", "Schach");
+
 }
 
 Interfaceb::~Interfaceb()

@@ -52,7 +52,7 @@ int brett::besitzer(int x,int y)
 	// 2==> Spieler 2
 	// -1 ==> nicht auf Spielfeld
 
-	if ((x>=0) && (x<8) && (y>0) && (y<8))
+	if ((x>=0) && (x<8) && (y>=0) && (y<8))
 	{
 		if (f[x+8*y]==' ') { return 0; }
 		if ((int(f[x+8*y])>='A') && (int(f[x+8*y]<='Z'))) { return 1; }
