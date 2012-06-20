@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 #include <ctype.h>
 
 Interfaceb::Interfaceb()
@@ -127,7 +128,7 @@ void Interfaceb::ausgabe(brett* b)
 	SDL_Surface* image=NULL;
 
 	//Hintergrund einfügen
-	image = SDL_LoadBMP("image/feld.bmp");
+	image = IMG_Load("image/feld.png");
 	if (image==NULL)
 	{
 		std::cout << "Grafik nicht verfuegbar." << std::endl;
@@ -148,7 +149,7 @@ void Interfaceb::ausgabe(brett* b)
 				SDL_Surface* figur;
 				SDL_Rect bereich;
 
-				char datei[]="image/bs.bmp";
+				char datei[]="image/bs.png";
 				datei[6]=tolower(l);
 
 				if (tolower(l)!=l) //Großbuchstabe->weiße Figur
@@ -156,7 +157,7 @@ void Interfaceb::ausgabe(brett* b)
 					datei[7]='w';
 				}
 
-				figur = SDL_LoadBMP(datei);
+				figur = IMG_Load(datei);
 
 				if (figur==NULL)
 				{

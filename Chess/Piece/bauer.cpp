@@ -23,7 +23,6 @@ bool Bauer::bewegungmoeglich(int a,int b,brett* brett)
 
 	if (besitzer==1)
 	{
-		std::cout << a << b << x << y << deltax << deltay << std::endl;
 	if ((b<y) && (deltax==0) && (deltay==1) && (brett->besitzer(a,b)==0)) { return true;}
 	if ((y==6) && (deltax==0) && (deltay==2) && (brett->besitzer(a,b-1)==0) && (brett->besitzer(a,b)==0)) { return true; }
 	if ((b<y) && (deltax==1) && (deltay==1) && (brett->besitzer(a,b)==2)) { return true; }
