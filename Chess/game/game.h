@@ -9,6 +9,7 @@
 #define GAME_H_
 
 #include "../Interface/interface.h"
+#include "../Interface/interfaceb.h"
 #include "../Piece/piece.h"
 #include "brett.h"
 

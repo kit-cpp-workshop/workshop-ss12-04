@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
 
 
 #include "koenig.h"

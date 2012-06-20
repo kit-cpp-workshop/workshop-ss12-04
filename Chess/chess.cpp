@@ -8,6 +8,7 @@
 #include <string>
 
 #include "Interface/interface.h"
+#include "Interface/interfaceb.h"
 #include "Game/game.h"
 
 int main()

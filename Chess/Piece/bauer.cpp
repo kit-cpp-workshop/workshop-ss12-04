@@ -6,7 +6,7 @@
  */
 
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
 #include "bauer.h"
 
 
@@ -19,18 +19,21 @@ bool Bauer::bewegungmoeglich(int a,int b,brett* brett)
 {
 	int deltay=std::abs(b-y);
 	int deltax=std::abs(a-x);
+	int yZugrichtung = (besitzer == 1) ? (-1) : (1);
+	int anderer = (besitzer ==1) ? (2) : (1);
 
-	if (besitzer==1)
+	if ((b-y)*yZugrichtung>0)
 	{
-		if ((b<y) && (deltax==0) && (deltay==1) && (brett->besitzer(a,b)==0)) { return true;}
-		if ((y==6) && (deltax==0) && (deltay==2) && (brett->besitzer(a,b-1)==0) && (brett->besitzer(a,b)==0)) { return true; }
-		if ((b<y) && (deltax==1) && (deltay==1) && (brett->besitzer(a,b)==2)) { return true; }
-	}
-	else
-	{
-		if ((b>y) && (deltax==0) && (deltay==1)  && (brett->besitzer(a,b)==0)) { return true; }
-		if ((y==1) && (deltax==0) && (deltay==2) && (brett->besitzer(a,b-1)==0) && (brett->besitzer(a,b)==0)) { return true; }
-		if ((b>y) && (deltax==1) && (deltay==1) && (brett->besitzer(a,b)==1)) { return true; }
+		if (deltax==0)
+		{
+			if ((deltay==1) && (brett->besitzer(a,b)==0)) { return true;}
+			if ((deltay==2) && ((y==6) || (y==1)) && (brett->besitzer(a,b-1)==0) && (brett->besitzer(a,b)==0)) { return true; }
+		}
+
+		if ((deltax==1) && (deltay==1) && (brett->besitzer(a,b)==2))
+		{
+			return true;
+		}
 	}
 
 	return false;

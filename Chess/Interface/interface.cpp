@@ -9,21 +9,26 @@
 #include "../game/brett.h"
 #include <iostream>
 #include <string>
+#include <limits>
 
 void Interface::einlesen(int p)
 {
-	std::cout << "Spieler " << p << ": Bitte Zug eingeben: ";
+	do
+	{
+		std::cout << "Spieler " << p << ": Bitte Zug eingeben: ";
+		std::cin >> p1a >> p1b >> p2a >> p2b;
 
-	std::cin >> p1a >> p1b >> p2a >> p2b;
-
-	while(std::cin.bad() || std::cin.fail())
-	    {
-			    std::cin.clear();
-	            std::cin.ignore(100, '\n');
-	            std::cout << "Spieler " << p << ": Bitte Zug eingeben: ";
-				std::cin >> p1a >> p1b >> p2a >> p2b;
+		if (std::cin.fail()==false)
+		{
+			break;
 		}
-
+		else
+		{
+		    std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	}
+	while (true);
 
 }
 
