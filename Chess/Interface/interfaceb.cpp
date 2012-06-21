@@ -11,6 +11,7 @@
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 #include <ctype.h>
 
 Interfaceb::Interfaceb()
@@ -25,7 +26,7 @@ Interfaceb::Interfaceb()
 		exit(-1);
 	}
 
-	display=SDL_SetVideoMode(630,650,24,SDL_SWSURFACE);
+	display=SDL_SetVideoMode(630,670,24,SDL_SWSURFACE);
 	if (display==NULL)
 	{
 		std::cout << "Fehler beim Erzeugen der Oberfläche." << std::endl;
@@ -49,6 +50,43 @@ Interfaceb::~Interfaceb()
 
 void Interfaceb::einlesen(int p)
 {
+	if (TTF_Init()==-1)
+	{
+		std::cout << "Fehler beim Starten der Textausgabe." << std::endl;
+		std::cin.get();
+		exit(-1);
+	}
+
+	TTF_Font* font;
+	font=TTF_OpenFont("font/JOURNAL.ttf",24);
+	if (font==NULL)
+	{
+		std::cout << "Schrift konnte nicht geladen werden." << std::endl;
+		std::cin.get();
+		exit(-1);
+	}
+
+	char text[]="Spieler 1 am Zug!";
+	text[8]=48+p;
+
+	SDL_Color textcolor;
+	textcolor.r=0;
+	textcolor.g=0;
+	textcolor.b=0;
+
+	SDL_Surface* nachricht=TTF_RenderText_Blended(font,text,textcolor);
+
+	SDL_Rect bereich;
+	bereich.x=0;
+	bereich.y=0;
+	bereich.w=630;
+	bereich.h=20;
+
+	SDL_BlitSurface(nachricht,NULL,display,&bereich);
+	SDL_UpdateRects(display,1,&bereich);
+	SDL_FreeSurface(nachricht);
+
+
 	bool exitLoop=false;
 	SDL_Rect mouse,start,ende;
 
@@ -89,9 +127,9 @@ void Interfaceb::einlesen(int p)
 	//std::cout << ende.x << "-" << ende.y << std::endl;
 
 	int sx=(int) ((start.x-51)/66);
-	int sy=(int) ((start.y-61)/66);
+	int sy=(int) ((start.y-81)/66);
 	int ex=(int) ((ende.x-51)/66);
-	int ey=(int) ((ende.y-51)/66);
+	int ey=(int) ((ende.y-81)/66);
 
 	//std::cout << sx << "-" << sy << std::endl;
 	//std::cout << ex << "-" << ey << std::endl;
@@ -102,25 +140,69 @@ void Interfaceb::einlesen(int p)
 	p2a=char(int('a')+ex);
 	p2b=8-ey;
 
-	/*std::cout << "Spieler " << p << ": Bitte Zug eingeben: ";
-
-	std::cin >> p1a >> p1b >> p2a >> p2b;
-
-	while(std::cin.bad() || std::cin.fail())
-	    {
-			    std::cin.clear();
-	            std::cin.ignore(100, '\n');
-	            std::cout << "Spieler " << p << ": Bitte Zug eingeben: ";
-				std::cin >> p1a >> p1b >> p2a >> p2b;
-		}*/
-
-
 }
 
 
 void Interfaceb::winner(int player)
 {
+	if (TTF_Init()==-1)
+	{
+		std::cout << "Fehler beim Starten der Textausgabe." << std::endl;
+		std::cin.get();
+		exit(-1);
+	}
 
+	TTF_Font* font;
+	font=TTF_OpenFont("font/JOURNAL.ttf",90);
+	if (font==NULL)
+	{
+		std::cout << "Schrift konnte nicht geladen werden." << std::endl;
+		std::cin.get();
+		exit(-1);
+	}
+
+	char text[]="Spieler 1 hat gewonnen!";
+	text[8]=48+player;
+
+	SDL_Color textcolor;
+	textcolor.r=0;
+	textcolor.g=0;
+	textcolor.b=0;
+
+	SDL_Surface* nachricht=TTF_RenderText_Blended(font,text,textcolor);
+
+	SDL_Rect bereich;
+	bereich.x=50;
+	bereich.y=300;
+	bereich.w=530;
+	bereich.h=70;
+
+	SDL_BlitSurface(nachricht,NULL,display,&bereich);
+	SDL_UpdateRects(display,1,&bereich);
+	SDL_FreeSurface(nachricht);
+
+	bool exitLoop=false;
+	while (!exitLoop)
+	{
+		SDL_Event event;
+
+		if (0==SDL_WaitEvent(&event))
+		{
+			std::cout << "Fehler beim Warten auf Event." << std::endl;
+			std::cin.get();
+			exitLoop=true;
+		}
+
+		switch(event.type)
+		{
+		case SDL_QUIT:
+			exitLoop=true;
+			exit(-1);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void Interfaceb::ausgabe(brett* b)
@@ -167,7 +249,7 @@ void Interfaceb::ausgabe(brett* b)
 				}
 
 				bereich.x=59+j*66;
-				bereich.y=69+i*66;
+				bereich.y=89+i*66;
 				bereich.w=50;
 				bereich.h=50;
 
