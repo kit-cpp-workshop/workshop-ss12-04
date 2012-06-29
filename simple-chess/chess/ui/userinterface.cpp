@@ -1,4 +1,6 @@
 #include "userinterface.h"
+#include <iostream>
+
 
 namespace chess {
 namespace ui {
@@ -33,8 +35,9 @@ game::move* CommandLine::read_move(color player_color){
   else
     std::cout << "Spieler Schwarz, bitte Zug eingeben: " << std::flush;
 
-  char from[2], to[2];
+  char from[3], to[3];
 
+  std::cin.width(3);
   std::cin >> from >> to;
 
   return new game::move(char2coor(from),char2coor(to),player_color);
