@@ -81,6 +81,9 @@ bool pawn::possible_move(coor from, coor to, chessboard &spielfeld) {
   if(grundlinie)
     geradeaus |= (to.y() - from.y() == dy*2);
 
+  //Geradeaus heißt, nicht rechts oder links:
+   geradeaus &= (std::abs(to.x() - from.x()) == 0);
+
   if(!schlagen && !geradeaus) return false;
 
   return true;
