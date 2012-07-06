@@ -13,6 +13,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include <ctype.h>
+#include <cstdlib>
 
 Interfaceb::Interfaceb()
 {
@@ -23,7 +24,8 @@ Interfaceb::Interfaceb()
 	{
 		std::cout << "Fehler bei Initalisieren von SDL." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
+
 	}
 
 	display=SDL_SetVideoMode(630,670,24,SDL_SWSURFACE);
@@ -31,7 +33,7 @@ Interfaceb::Interfaceb()
 	{
 		std::cout << "Fehler beim Erzeugen der Oberfläche." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
 	}
 
 	SDL_WM_SetCaption("Schach", "Schach");
@@ -54,7 +56,7 @@ void Interfaceb::einlesen(int p)
 	{
 		std::cout << "Fehler beim Starten der Textausgabe." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
 	}
 
 	TTF_Font* font;
@@ -63,7 +65,7 @@ void Interfaceb::einlesen(int p)
 	{
 		std::cout << "Schrift konnte nicht geladen werden." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
 	}
 
 	char text[]="Spieler 1 am Zug!";
@@ -116,7 +118,7 @@ void Interfaceb::einlesen(int p)
 			break;
 		case SDL_QUIT:
 			exitLoop=true;
-			exit(-1);
+			std::exit(-1);
 			break;
 		default:
 			break;
@@ -126,10 +128,10 @@ void Interfaceb::einlesen(int p)
 	//std::cout << start.x << "-" << start.y << std::endl;
 	//std::cout << ende.x << "-" << ende.y << std::endl;
 
-	int sx=(int) ((start.x-51)/66);
-	int sy=(int) ((start.y-81)/66);
-	int ex=(int) ((ende.x-51)/66);
-	int ey=(int) ((ende.y-81)/66);
+	int sx=(int) ((start.x-51)/66); if (start.x<51) { sx=10; }
+	int sy=(int) ((start.y-81)/66); if (start.y<81) { sy=10; }
+	int ex=(int) ((ende.x-51)/66); if (ende.x<51) { ex=10; }
+	int ey=(int) ((ende.y-81)/66); if (ende.y<81) { ey=10; }
 
 	//std::cout << sx << "-" << sy << std::endl;
 	//std::cout << ex << "-" << ey << std::endl;
@@ -149,7 +151,7 @@ void Interfaceb::winner(int player)
 	{
 		std::cout << "Fehler beim Starten der Textausgabe." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
 	}
 
 	TTF_Font* font;
@@ -158,7 +160,7 @@ void Interfaceb::winner(int player)
 	{
 		std::cout << "Schrift konnte nicht geladen werden." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
 	}
 
 	char text[]="Spieler 1 hat gewonnen!";
@@ -197,7 +199,7 @@ void Interfaceb::winner(int player)
 		{
 		case SDL_QUIT:
 			exitLoop=true;
-			exit(-1);
+			std::exit(-1);
 			break;
 		default:
 			break;
@@ -215,7 +217,7 @@ void Interfaceb::ausgabe(brett* b)
 	{
 		std::cout << "Grafik nicht verfuegbar." << std::endl;
 		std::cin.get();
-		exit(-1);
+		std::exit(-1);
 	}
 
 	SDL_BlitSurface(image,NULL,display,NULL);
@@ -245,7 +247,7 @@ void Interfaceb::ausgabe(brett* b)
 				{
 					std::cout << "Grafik nicht verfuegbar." << std::endl;
 					std::cin.get();
-					exit(-1);
+					std::exit(-1);
 				}
 
 				bereich.x=59+j*66;
