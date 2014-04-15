@@ -10,7 +10,7 @@ Die Vortragsfolien stehen als [PDF](kit-cpp-workshop.github.com/raw/downloads/wo
 
 ### Screencast
 
-Eine Aufzeichnung des Vortrags steht zum [Download](http://ubuntuone.com/7aINm5vTShhKjOTjbrRkUo) bereit. Von Audioqualität kann man leider dieses Mal nicht sprechen, das Hintergrundrauschen/-pfeifen hat außerdem alle Fragen und Diskussionsbeiträge überdeckt.
+Eine Aufzeichnung des Vortrags steht zum [Download](https://drive.google.com/file/d/0B18AwdjM48imMlh0eFRwakkyeEk/edit?usp=sharing) bereit. Von Audioqualität kann man leider dieses Mal nicht sprechen, das Hintergrundrauschen/-pfeifen hat außerdem alle Fragen und Diskussionsbeiträge überdeckt.
 
  - ab 00:00 Intro
  - ab 00:37 Übersicht Übersetzungs-Phasen
